@@ -1,2 +1,42 @@
-<h1>User::Posts#new</h1>
-<p>Find me in app/views/user/posts/new.html.erb</p>
+<%= form_with(model: @post, local: true) do |form| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :image, '写真のアップロード' %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :caption %>
+    <%= form.text_area :caption %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_id, '既存のロケーションを選択' %>
+    <%= form.collection_select :location_id, Location.all, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :new_location_name, '新しいロケーション名' %>
+    <%= form.text_field :new_location_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :new_location_description, '新しいロケーションの説明' %>
+    <%= form.text_area :new_location_description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

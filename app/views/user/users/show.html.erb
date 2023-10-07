@@ -1,2 +1,31 @@
-<h1>User::Users#show</h1>
-<p>Find me in app/views/user/users/show.html.erb</p>
+<div class="container py-5">
+  <div class="row mt-2 mb-3 offset-1 text-center">
+    <h3 class="px-4 title">マイページ</h3>
+  </div>
+  <div class="row">
+    <div class="col-10 mx-auto">
+      <div class="row mb-2">
+        <h3 class="col-2">登録情報</h3>
+        <p>
+          <%= link_to "編集する", edit_information_path, class: "btn btn-success ml-5 pl-5 pr-5" %>
+        </p>
+      </div>
+       <thead>
+         <tr>
+           <th>プロフィール画像</th>
+           <th>ユーザー名</th>
+         </tr>
+       </thead>
+       <table class="table table-bordered">
+         <tr>
+           <td><%= image_tag @user.get_profile_image(50, 50) %></td>
+           <td><%= @user.last_name %><%= @user.first_name %></td>
+           <td>フォロー数: <%= @user.followings.count %></td>
+           <td>フォロワー数: <%= @user.followers.count %></td>
+           <td><%= render "user/relationships/btn", user: @user, options: { class: "follow-link" } %></td>
+         </tr>
+       </table>
+      </div>
+    </div>
+  </div>
+</div>

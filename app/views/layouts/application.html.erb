@@ -5,12 +5,122 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/b11c46ab0d.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+    <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+
+              <% if admin_signed_in? %>
+            <div class="row">
+              <li class="ml-auto nav-item">
+                <%= link_to admin_users_path do %>
+                  <i class="fas fa-cookie-bite">会員一覧</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to admin_posts_path do %>
+                  <i class="fas fa-users">投稿一覧</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_admin_session_path, method: :delete do %>
+                  <i class="fas fa-sign-out-alt mr-2">ログアウト</i>
+                <% end %>
+              </li>
+
+              <div class="search-form col-4 mt-2 ml-auto">
+                <form>
+                  <input type="text" name="q" placeholder="Search">
+                  <button type="submit", class="fa-solid fa-magnifying-glass"></button>
+                </form>
+              </div>
+            </div>
+
+            <% elsif user_signed_in? %>
+            <div class="row">
+              <li class="ml-auto nav-item">
+                <%= link_to users_mypage_path do %>
+                  <i class="fa-solid fa-image-portrait">マイページ</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_post_path do %>
+                <i class="fa-solid fa-cookie-bite">投稿</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to searches_path do %>
+                <i class="fa-solid fa-cart-shopping">検索</i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, method: :delete do %>
+                <i class="fa-solid fa-right-from-bracket mr-3">ログアウト</i>
+                <% end %>
+              </li>
+
+
+              <div class="search-form col-5 mt-2 ml-auto">
+                <form>
+                  <input type="text" name="q" placeholder="Search">
+                  <button type="submit", class="fa-solid fa-magnifying-glass"></button>
+                </form>
+              </div>
+            </div>
+
+          <% else %>
+            <li class="nav-item">
+              <%= link_to about_path do %>
+                <i class="fa-solid fa-eject">about</i>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to  new_user_registration_path do %>
+              <i class="fa-solid fa-right-to-bracket">新規登録</i>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_session_path do %>
+              <i class="fa-solid fa-arrow-right-to-bracket">ログイン</i>
+              <% end %>
+            </li>
+
+          <% end %>
+
+      </ul>
+    </div>
+  </nav>
+    </header>
+
+      <div class="container">
+  		   <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+          <% flash.each do |key, value| %>
+            <p class="alert alert-<%= key %>">
+              <%= sanitize value, tags: %w(br) %>
+            </p>
+          <% end %>
+         </div>
+      </div>
+
+</div>
+
     <%= yield %>
+    </main>
+    <footer>
+    </footer>
   </body>
 </html>

@@ -17,12 +17,16 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
+devise_scope :user do
+    post 'users/guest_sign_in', to: 'user/sessions#guest_sign_in'
+ end
+
   root to: 'user/homes#top' # モジュール構造を含めて正確に指定
   get 'home/about', to: 'user/homes#about', as: 'about' # モジュール構造を含めて正確に指定
 
   scope module: :user do
   resources :searches, only: [:index]
-  resources :posts, only:[:index, :show, :new]
+  resources :posts, only:[:index, :show, :new, :create]
    resource :likes, only:[:index, :create, :destroy]
    resources :replyes, only:[:create, :destroy]
    get'users/mypage', :to =>'users#show'

@@ -1,2 +1,29 @@
-<h1>User::Users#edit</h1>
-<p>Find me in app/views/user/users/edit.html.erb</p>
+<div class="container mt-5 mb-5">
+  <div class="row mt-2 mb-3 offset-1 text-center">
+    <h3 class="px-4 title-background">会員情報編集</h3>
+  </div>
+
+   <%= form_with model: @user, url:users_information_path, method: :patch do |f| %>
+  <table>
+    <tr>
+      <td>氏名</td>
+      <td><%= f.text_field :last_name, class: "form-control last_name" %></td>
+      <td><%= f.text_field :first_name, class: "form-control first_name" %></td>
+    </tr>
+    <tr>
+      <td>フリガナ</td>
+      <td><%= f.text_field :last_name_kana, class: "form-control last_name_kana" %></td>
+      <td><%= f.text_field :first_name_kana, class: "form-control first_name_kana" %></td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td><%= f.text_field :email, class: "form-control email" %></td>
+    </tr>
+  </table>
+  <div class="form-group">
+    <%= f.submit " 編集内容を保存 ", class: "btn btn-success" %>
+    <%= link_to "退会する", users_confirm_path, class: "btn btn-danger ml-5" %>
+  </div>
+
+  <% end %>
+</div>

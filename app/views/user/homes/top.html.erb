@@ -1,2 +1,21 @@
-<h1>User::Homes#top</h1>
-<p>Find me in app/views/user/homes/top.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+    <div class="row">
+
+
+    <div class="btn-wrapper col-10 mx-auto">
+     <div class="row">
+      <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+     </div>
+
+    <div class="row">
+      <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
+    </div>
+    <h5 class="mt-5">ゲストログインはこちらから</h5>
+    <div class="col mb-3 mt-3">
+    <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
+    </div>
+     </div>
+    </div>
+</div>
