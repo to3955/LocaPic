@@ -6,6 +6,15 @@
    <%= form_with model: @user, url:users_information_path, method: :patch do |f| %>
   <table>
     <tr>
+      <td>プロフィール画像</td>
+      <td><%= image_tag @user.profile_image, width: 50, height: 50 if @user.profile_image.attached? %></td>
+    </tr>
+    <div class="form-group">
+  <label for="inputImage">Image</label>
+  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
+  <label for="inputImage">
+  </div>
+    <tr>
       <td>氏名</td>
       <td><%= f.text_field :last_name, class: "form-control last_name" %></td>
       <td><%= f.text_field :first_name, class: "form-control first_name" %></td>

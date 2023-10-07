@@ -1,41 +1,47 @@
 class User::PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!
 
   def new
     @post = current_user.posts.build
+    @location = Location.new # 新しい場所を入力するフォーム用
   end
 
   def create
-    @post = current_user.posts.build(post_params)
+  @post = current_user.posts.build(post_params)
 
+   if params[:post][:new_location_name].present?
     # 新しい場所を作成し、緯度と経度を設定
-    new_location = Location.create(
+    @location = Location.new(
       place_name: params[:post][:new_location_name],
-      description: params[:post][:new_location_description], # :description に変更
+      description: params[:post][:new_location_description],
       latitude: params[:post][:new_location_latitude],
       longitude: params[:post][:new_location_longitude]
-    )
+     )
 
-    # 新しい場所を投稿に関連付ける
-    @post.location = new_location
+    # 投稿に新しい場所を関連付ける
+     @post.location = @location
+   end
 
-    if @post.save
-      redirect_to @post, notice: '投稿が作成されました'
-    else
-      render :new
-    end
+   if @post.save
+    redirect_to @post, notice: '投稿が作成されました'
+   else
+    render :new
+   end
   end
 
+
   def index
-    @post = Post.all
+    @posts = Post.all
   end
 
   def show
   end
 
+
   private
 
   def post_params
-    params.require(:post).permit(:caption, :image) # 必要な属性を許可
+     params.require(:post).permit(:caption, :image, :new_location_name, :new_location_description)
   end
+
 end

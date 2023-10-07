@@ -1,10 +1,14 @@
 class User::UsersController < ApplicationController
+
   def show
     @user = current_user
   end
 
   def edit
     @user = current_user
+    if @user != current_user
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def update
@@ -26,10 +30,9 @@ class User::UsersController < ApplicationController
     redirect_to root_path
   end
 
-  private
-
-  def user_params
-    params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email)
+  def post_params
+  params.require(:post).permit(:caption, :image, :new_location_name, :new_location_description)
   end
+
 
 end

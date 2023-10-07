@@ -1,2 +1,10 @@
-<h1>User::Posts#index</h1>
-<p>Find me in app/views/user/posts/index.html.erb</p>
+<h1>投稿一覧</h1>
+
+<% @posts.each do |post| %>
+  <div class="post">
+    <%= image_tag post.image.url %>
+    <h2><%= post.caption %></h2>
+    <p>場所: <%= post.location.place_name %></p>
+    <p>説明: <%= post.location.description %></p>
+  </div>
+<% end %>
