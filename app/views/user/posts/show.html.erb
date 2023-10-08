@@ -1,2 +1,12 @@
-<h1>User::Posts#show</h1>
-<p>Find me in app/views/user/posts/show.html.erb</p>
+<% @posts.each do |post| %>
+  <div class="post">
+    <%= image_tag post.image, width: 300, height: 300 %>
+    <h2><%= post.caption %></h2>
+    <% if post.location %>
+      <p>場所: <%= post.location.place_name %></p>
+      <p>説明: <%= post.location.description %></p>
+    <% else %>
+      <p>場所情報がありません</p>
+    <% end %>
+  </div>
+<% end %>

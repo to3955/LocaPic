@@ -35,13 +35,14 @@ class User::PostsController < ApplicationController
   end
 
   def show
+    @posts = current_user.posts
   end
 
 
   private
 
-  def post_params
-     params.require(:post).permit(:caption, :image, :new_location_name, :new_location_description)
-  end
+ def post_params
+  params.require(:post).permit(:caption, :image, :location_id, :new_location_name, :new_location_description)
+ end
 
 end

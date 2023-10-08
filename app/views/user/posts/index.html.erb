@@ -2,9 +2,13 @@
 
 <% @posts.each do |post| %>
   <div class="post">
-    <%= image_tag post.image.url %>
+    <%= image_tag post.image, width: 300, height: 300 %>
     <h2><%= post.caption %></h2>
-    <p>場所: <%= post.location.place_name %></p>
-    <p>説明: <%= post.location.description %></p>
+    <% if post.location %>
+      <p>場所: <%= post.location.place_name %></p>
+      <p>説明: <%= post.location.description %></p>
+    <% else %>
+      <p>場所情報がありません</p>
+    <% end %>
   </div>
 <% end %>
