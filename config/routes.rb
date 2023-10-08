@@ -26,7 +26,7 @@ devise_scope :user do
 
   scope module: :user do
   resources :searches, only: [:index]
-  resources :posts, only:[:index, :show, :new, :create]
+  resources :posts, only:[:index, :show, :new, :create, :destroy]
    resource :likes, only:[:index, :create, :destroy]
    resources :replyes, only:[:create, :destroy]
    get'users/mypage', :to =>'users#show'

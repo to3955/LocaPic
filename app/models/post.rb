@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
 
-  belongs_to :location
+  belongs_to :user
+  has_one :location
   has_one_attached :image
   has_many :replyes, dependent: :destroy
 

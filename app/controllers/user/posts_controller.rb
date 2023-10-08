@@ -15,11 +15,13 @@ class User::PostsController < ApplicationController
       place_name: params[:post][:new_location_name],
       description: params[:post][:new_location_description],
       latitude: params[:post][:new_location_latitude],
-      longitude: params[:post][:new_location_longitude]
+      longitude: params[:post][:new_location_longitude],
+      post_id: @post.id
      )
 
     # 投稿に新しい場所を関連付ける
      @post.location = @location
+
    end
 
    if @post.save
@@ -35,6 +37,7 @@ class User::PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id])
     @posts = current_user.posts
   end
 
