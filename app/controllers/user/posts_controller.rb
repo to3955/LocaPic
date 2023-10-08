@@ -21,7 +21,6 @@ class User::PostsController < ApplicationController
 
     # 投稿に新しい場所を関連付ける
      @post.location = @location
-
    end
 
    if @post.save
@@ -34,12 +33,21 @@ class User::PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @post = Post.new
+    @reply = Reply.new
   end
 
   def show
     @post = Post.find(params[:id])
     @posts = current_user.posts
   end
+
+  def destroy
+  @post = Post.find(params[:id])
+  @post.destroy
+  redirect_to posts_path
+  end
+
 
 
   private

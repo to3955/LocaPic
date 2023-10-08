@@ -9,6 +9,14 @@ class User::ReplyesController < ApplicationController
   end
 
   def destroy
+     reply = Reply.find(params[:id])
+    post = reply.post # コメントが属する投稿を取得
+    if reply.user == current_user
+      reply.destroy
+      redirect_to post_path(post), notice: 'コメントが削除されました'
+    else
+      redirect_to post_path(post), alert: 'コメントを削除する権限がありません'
+    end
   end
   
   private

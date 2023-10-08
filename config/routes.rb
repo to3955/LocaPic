@@ -27,8 +27,8 @@ devise_scope :user do
   scope module: :user do
   resources :searches, only: [:index]
   resources :posts, only:[:index, :show, :new, :create, :destroy]
-   resource :likes, only:[:index, :create, :destroy]
-   resources :replyes, only:[:create, :destroy]
+   resources :replies, only: [:create, :destroy]
+    resource :likes, only:[:index, :create, :destroy]
    get'users/mypage', :to =>'users#show'
    get 'information/edit', to: 'users#edit', as: 'edit_information'
    patch 'users/information' => "users#update"

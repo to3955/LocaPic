@@ -11,4 +11,32 @@
       <p>場所情報がありません</p>
     <% end %>
   </div>
+
+  <div>
+    <p>コメント件数：<%= post.replies.count %></p>
+    <% post.replies.each do |reply| %>
+      <p><%= image_tag reply.user.get_profile_image(100, 100) %></p>
+      <%= reply.user.name %>
+      <%= reply.created_at.strftime('%Y/%m/%d') %><%= reply.comment %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form_with model: [post, Reply.new], url: posts_path(post) do |f| %>
+      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+      <%= f.submit "送信する" %>
+    <% end %>
+  </div>
+
+  <div>
+    <% if !post.likes.pluck(:user_id).include?(current_user.id) %>
+      <%= link_to likes_path(post_id: post.id), method: :post do %>
+        <i class="far fa-heart like-btn"></i>
+      <% end %>
+    <% else %>
+      <%= link_to likes_path(post_id: post.id), method: :delete do %>
+        <i class="fas fa-heart unlike-btn"></i>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
