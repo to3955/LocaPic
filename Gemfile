@@ -57,3 +57,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'gmaps4rails'
 gem 'geocoder'
+gem 'jquery-rails'

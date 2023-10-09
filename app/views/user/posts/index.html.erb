@@ -13,20 +13,12 @@
   </div>
 
   <div>
-    <p>コメント件数：<%= post.replies.count %></p>
-    <% post.replies.each do |reply| %>
-      <p><%= image_tag reply.user.get_profile_image(100, 100) %></p>
-      <%= reply.user.name %>
-      <%= reply.created_at.strftime('%Y/%m/%d') %><%= reply.comment %>
-    <% end %>
+      <p>コメント件数：<%= post.replies.count %></p>
+      <%= form_with model: [post, Reply.new], url: reply_path(post.user, post), remote: true do |f| %>
+      <% end %>
+      <%= render 'user/replies/form', post: @posts %>
   </div>
 
-  <div>
-    <%= form_with model: [post, Reply.new], url: posts_path(post) do |f| %>
-      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-      <%= f.submit "送信する" %>
-    <% end %>
-  </div>
 
   <div>
     <% if !post.likes.pluck(:user_id).include?(current_user.id) %>

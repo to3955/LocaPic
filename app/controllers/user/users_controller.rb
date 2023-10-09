@@ -1,7 +1,20 @@
 class User::UsersController < ApplicationController
+  before_action :authenticate_user!
 
   def show
     @user = current_user
+  end
+
+  def follows
+    @user = User.find(params[:id])
+    @users = @user.following
+    render 'user/relationships/followings'
+  end
+
+  def follows
+    @user = User.find(params[:id])
+    @users = @user.followings # フォローしているユーザーのリストを取得
+    render 'user/relationships/followings'
   end
 
   def edit

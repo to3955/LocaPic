@@ -10,22 +10,24 @@
           <%= link_to "編集する", edit_information_path, class: "btn btn-success ml-5 pl-5 pr-5" %>
         </p>
       </div>
-       <thead>
-         <tr>
-           <th>プロフィール画像</th>
-           <th>ユーザー名</th>
-         </tr>
-       </thead>
-       <table class="table table-bordered">
-         <tr>
-           <td><%= image_tag @user.get_profile_image(50, 50) %></td>
-           <td><%= @user.last_name %><%= @user.first_name %></td>
-           <td>フォロー数: <%= @user.followings.count %></td>
-           <td>フォロワー数: <%= @user.followers.count %></td>
-           <td><%= render "user/relationships/btn", user: @user, options: { class: "follow-link" } %></td>
-         </tr>
-       </table>
-      </div>
+      <table class="table table-bordered">
+        <tr>
+          <th>プロフィール画像</th>
+          <th>ユーザー名</th>
+        </tr>
+        <tr>
+          <td><%= image_tag @user.get_profile_image(50, 50) %></td>
+          <td><%= @user.last_name %><%= @user.first_name %></td>
+          <td>フォロー数: <%= @user.followings.count %></td>
+          <td>フォロワー数: <%= @user.followers.count %></td>
+          <td><%= render "user/relationships/btn", user: @user, options: { class: "follow-link" } %></td>
+        </tr>
+      </table>
     </div>
   </div>
-  <%= link_to "自分の投稿一覧", post_path(current_user) %>
+  <div class="text-center">
+    <%= link_to "自分の投稿一覧", post_path(current_user), class: "btn btn-primary mt-3" %>
+    <%= link_to "フォロー一覧", follows_user_path(@user), class: "btn btn-info mt-3 ml-3" %>
+    <%= link_to "フォロワー一覧", followers_user_path(@user), class: "btn btn-info mt-3 ml-3" %>
+  </div>
+</div>
