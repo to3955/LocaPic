@@ -11,9 +11,9 @@ class User::UsersController < ApplicationController
     render 'user/relationships/followings'
   end
 
-  def follows
+  def followers
     @user = User.find(params[:id])
-    @users = @user.followings # フォローしているユーザーのリストを取得
+    @users = @user.followers # フォロワーのリストを取得
     render 'user/relationships/followings'
   end
 
