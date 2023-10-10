@@ -1,5 +1,6 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :is_matching_login_user, only: [:update]
 
   def new
     @post = current_user.posts.build
@@ -38,14 +39,17 @@ class User::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @posts = current_user.posts
+  end
+
+  def show_detail
+  @post = Post.find(params[:id])
   end
 
   def destroy
   @post = Post.find(params[:id])
   @post.destroy
-  redirect_to posts_path
+  redirect_to post_path
   end
 
 
@@ -54,6 +58,13 @@ class User::PostsController < ApplicationController
 
  def post_params
   params.require(:post).permit(:caption, :image, :location_id, :new_location_name, :new_location_description)
+ end
+
+ def is_matching_login_user
+  post = Post.find(params[:id])
+  unless post.user_id == current_user.id
+    redirect_to post_path
+  end
  end
 
 end

@@ -25,10 +25,15 @@ devise_scope :user do
   get 'home/about', to: 'user/homes#about', as: 'about' # モジュール構造を含めて正確に指定
 
   scope module: :user do
-  resources :searches, only: [:index]
+  resources :searches, only: [:index, :search]
+  resources :posts do
+  resources :replies, only: [:create, :destroy]
+  resources :likes, only: [:create, :destroy]
+  member do
+      get 'show_detail' # 詳細ページへのルートを追加
+    end
+  end
   resources :posts, only: [:index, :show, :new, :create, :destroy]
-    resources :replies, only: [:create, :destroy]
-    resource :likes, only:[:index, :create, :destroy]
    get'users/mypage', :to =>'users#show'
    get 'information/edit', to: 'users#edit', as: 'edit_information'
    patch 'users/information' => "users#update"
@@ -52,4 +57,4 @@ devise_scope :user do
     resources :posts, only: [:index, :destroy]
   end
 
-end
+ end

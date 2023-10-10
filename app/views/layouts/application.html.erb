@@ -66,11 +66,6 @@
                 <%= link_to "投稿一覧", posts_path %>
               </li>
               <li class="nav-item">
-                <%= link_to searches_path do %>
-                <i class="fa-solid fa-cart-shopping">検索</i>
-                <% end %>
-              </li>
-              <li class="nav-item">
                 <%= link_to destroy_user_session_path, method: :delete do %>
                 <i class="fa-solid fa-right-from-bracket mr-3">ログアウト</i>
                 <% end %>
@@ -79,8 +74,9 @@
 
               <div class="search-form col-5 mt-2 ml-auto">
                 <form>
-                  <input type="text" name="q" placeholder="Search">
-                  <button type="submit", class="fa-solid fa-magnifying-glass"></button>
+                  <% if user_signed_in? %>
+                  <%= render 'user/searches/search' %>
+                  <% end %>
                 </form>
               </div>
             </div>

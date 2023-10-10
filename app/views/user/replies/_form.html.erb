@@ -1,6 +1,6 @@
 <div>
-    <%= form_with model: [post, Reply.new], url: post_path(post) do |f| %>
-      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-      <%= f.submit "送信する" %>
-    <% end %>
-  </div>
+  <%= form_with model: [post, Reply.new], url: post_replies_path(post, @reply), remote: true do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

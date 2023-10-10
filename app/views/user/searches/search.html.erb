@@ -1,7 +1,7 @@
 <table class="table table-hover table-inverse">
   <!--検索対象モデルがUserの時 -->
   <% if @range == "User" %>
-  <h2>Users search for "<%= @word %>"</h2>
+    <h2>Users search for "<%= @word %>"</h2>
     <thead>
       <tr>
         <th>image</th>
@@ -13,30 +13,30 @@
       <% @users.each do |user| %>
         <tr>
           <td><%= image_tag user.get_profile_image(50, 50) %></td>
-          <td><%= @user.last_name %><%= @user.first_name %></td>
+          <td><%= user.last_name %><%= user.first_name %></td>
         </tr>
       <% end %>
     </tbody>
   <% else %>
     <!--検索対象モデルがUserではない時(= 検索対象モデルがBookの時) -->
+    <h2>Posts search for "<%= @word %>"</h2>
     <thead>
       <tr>
         <th></th>
         <th>場所</th>
         <th>説明</th>
-
       </tr>
+    </thead>
     <tbody>
-    <h2>Posts search for "<%= @word %>"</h2>
-    <% @posts.each do |post| %>
-      <tr>
-        <td>
-          <%= link_to user_path(post.user) do %>
-            <%= image_tag post.user.get_profile_image(50, 50) %>
-          <% end %>
-        </td>
-        <td><%= link_to  post.location.place_name, post_path(post.id) %></td>
-        <td><%=  post.location.description %></td>
+      <% @posts.each do |post| %>
+        <tr>
+          <td>
+            <%= link_to user_path(post.user) do %>
+              <%= image_tag post.user.get_profile_image(50, 50) %>
+            <% end %>
+          </td>
+          <td><%= link_to post.location.place_name, post_path(post.id) %></td>
+          <td><%= post.location.description %></td>
         </tr>
       <% end %>
     </tbody>

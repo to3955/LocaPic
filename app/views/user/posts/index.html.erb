@@ -1,34 +1,24 @@
 <h1>投稿一覧</h1>
 
-<% @posts.each do |post| %>
-  <div class="post">
-    <%= image_tag post.image, width: 300, height: 300 %>
-    <h2><%= post.caption %></h2>
-    <% if post.location %>
-      <p>場所: <%= post.location.place_name %></p>
-      <p>説明: <%= post.location.description %></p>
-    <% else %>
-      <p>場所情報がありません</p>
-    <% end %>
-  </div>
-
-  <div>
-      <p>コメント件数：<%= post.replies.count %></p>
-      <%= form_with model: [post, Reply.new], url: reply_path(post.user, post), remote: true do |f| %>
+<div class="post-container">
+  <% @posts.each do |post| %>
+    <div class="post">
+      <%= image_tag post.image, width: 300, height: 300 %>
+      <h2><%= post.caption %></h2>
+      <% if post.location %>
+        <p>場所: <%= post.location.place_name %></p>
+        <p>説明: <%= post.location.description %></p>
+      <% else %>
+        <p>場所情報がありません</p>
       <% end %>
-      <%= render 'user/replies/form', post: @posts %>
-  </div>
+    </div>
 
-
-  <div>
-    <% if !post.likes.pluck(:user_id).include?(current_user.id) %>
-      <%= link_to likes_path(post_id: post.id), method: :post do %>
-        <i class="far fa-heart like-btn"></i>
-      <% end %>
-    <% else %>
-      <%= link_to likes_path(post_id: post.id), method: :delete do %>
-        <i class="fas fa-heart unlike-btn"></i>
-      <% end %>
-    <% end %>
-  </div>
-<% end %>
+    <div>
+        <%= render 'user/replies/form', post: post %>
+    </div>
+    <div>
+      <%= link_to "詳細を表示", show_detail_post_path(post.user, post), class: "btn btn-primary" %>
+      <%= render 'user/likes/btn', post: post %>
+    </div>
+  <% end %>
+</div>
