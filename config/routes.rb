@@ -25,10 +25,11 @@ devise_scope :user do
   get 'home/about', to: 'user/homes#about', as: 'about' # モジュール構造を含めて正確に指定
 
   scope module: :user do
-  resources :searches, only: [:index, :search]
+  get "user/searches" => "user/searches#search"
+  resources :searches, only: [:index]
   resources :posts do
   resources :replies, only: [:create, :destroy]
-  resources :likes, only: [:create, :destroy]
+  resource :likes, only: [:create, :destroy]
   member do
       get 'show_detail' # 詳細ページへのルートを追加
     end
