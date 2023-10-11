@@ -20,17 +20,6 @@ def get_profile_image(width, height)
 end
 
 
-def self.guest
-  find_or_create_by(email: 'guest@example.com') do |user|
-    user.password = SecureRandom.urlsafe_base64
-    user.last_name = "ゲスト"
-    user.first_name = "ユーザー"
-    user.last_name_kana = "ゲスト"
-    user.first_name_kana = "ユーザー"
-    # その他の属性を設定する場合はここで設定
-  end
-end
-
   # フォローしている関連付け
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
 
@@ -70,6 +59,24 @@ end
    else
      @user = User.all
    end
+  end
+
+
+  def guest?
+  # 通常のユーザーかどうかを判別する条件を記述
+  # 例: ゲストユーザーは email が 'guest@example.com' の場合と仮定
+  self.email == 'guest@example.com'
+  end
+
+  def self.guest
+  find_or_create_by(email: 'guest@example.com') do |user|
+    user.password = SecureRandom.urlsafe_base64
+    user.last_name = "ゲスト"
+    user.first_name = "ユーザー"
+    user.last_name_kana = "ゲスト"
+    user.first_name_kana = "ユーザー"
+    # その他の属性を設定する場合はここで設定
+    end
   end
 
 

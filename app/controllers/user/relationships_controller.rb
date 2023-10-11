@@ -1,5 +1,6 @@
 class User::RelationshipsController < ApplicationController
  before_action :authenticate_user!
+ before_action :check_guest, only: [:create, :like, :comment]
 
 
   def create
@@ -23,4 +24,14 @@ class User::RelationshipsController < ApplicationController
     user = User.find(params[:user_id])
     @users = user.followers
   end
+
+  private
+
+  def check_guest
+    if current_user.guest?
+      # ゲストユーザーの場合、アクセスを制限
+      redirect_to root_path, alert: "ゲストユーザーはこのアクションを実行できません。"
+    end
+  end
+
 end

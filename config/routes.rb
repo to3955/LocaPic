@@ -10,6 +10,7 @@ devise_for :user,skip: [:passwords], controllers: {
   registrations: "user/registrations",
   sessions: 'user/sessions'
 }
+post 'user/guest_login', to: 'user/sessions#guest_login'
 
 # 管理者用
 # URL /admin/sign_in ...

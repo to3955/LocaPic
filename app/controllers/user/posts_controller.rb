@@ -1,6 +1,7 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:update]
+  before_action :check_guest, only: [:new, :create, :destroy]
 
   def new
     @post = current_user.posts.build
@@ -84,6 +85,13 @@ class User::PostsController < ApplicationController
   unless post.user_id == current_user.id
     redirect_to post_path
   end
+ end
+
+ def check_guest
+    if current_user.guest?
+      # ゲストユーザーの場合、アクセスを制限
+      redirect_to root_path, alert: "ゲストユーザーはこのアクションを実行できません。"
+    end
  end
 
 end

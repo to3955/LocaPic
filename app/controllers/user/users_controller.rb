@@ -1,5 +1,6 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_guest, only: [:show]
 
   def show
     @user = current_user
@@ -23,7 +24,7 @@ class User::UsersController < ApplicationController
       redirect_to user_path(current_user.id)
     end
   end
-  
+
 
   def update
     @user = current_user
@@ -52,6 +53,13 @@ class User::UsersController < ApplicationController
 
   def user_params
   params.require(:user).permit(:last_name, :first_name, :email, :is_deleted)  # 必要な属性を適切に設定
+  end
+
+  def check_guest
+    if current_user.guest?
+      # ゲストユーザーの場合、アクセスを制限
+      redirect_to root_path, alert: "ゲストユーザーはこのアクションを実行できません。"
+    end
   end
 
 end
