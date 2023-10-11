@@ -5,6 +5,7 @@ class User::SearchesController < ApplicationController
 
 
  def search
+   exit
    @range = params[:range]
    @word = params[:word]
 

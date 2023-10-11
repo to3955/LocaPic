@@ -25,7 +25,7 @@ devise_scope :user do
   get 'home/about', to: 'user/homes#about', as: 'about' # モジュール構造を含めて正確に指定
 
   scope module: :user do
-  get '/searches/search', to: 'searches#search', as: 'search'
+  get 'search', to: 'search#search', as: 'search'
   resources :searches, only: [:index]
   resources :posts do
     member do
@@ -44,8 +44,6 @@ devise_scope :user do
       get :follows, :followers
     end
       resource :relationships, only: [:index, :create, :destroy]
-
-       get "search" => "users#search"
     end
   resources :locations, only: [:index, :show]
 
