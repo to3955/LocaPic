@@ -35,7 +35,16 @@ class User::PostsController < ApplicationController
   def index
     @posts = Post.all
     @post = Post.new
-    @reply = Reply.new
+
+    @like_counts = {}
+    @posts.each do |post|
+    @like_counts[post.id] = post.likes.count
+    end
+ # 各投稿のコメント数（Replyの数）を取得
+    @comment_counts = {}
+    @posts.each do |post|
+    @comment_counts[post.id] = post.replies.count
+    end
   end
 
   def show
@@ -43,13 +52,23 @@ class User::PostsController < ApplicationController
   end
 
   def show_detail
-  @post = Post.find(params[:id])
+    @post = Post.find(params[:id])
+    @reply = Reply.new
+
+    # 特定の投稿のいいねの数を取得
+    @like_counts = {}
+    @like_counts[@post.id] = @post.likes.count
+
+    # 特定の投稿のコメント数（Replyの数）を取得
+    @comment_counts = {}
+    @comment_counts[@post.id] = @post.replies.count
   end
 
+
   def destroy
-  @post = Post.find(params[:id])
-  @post.destroy
-  redirect_to post_path
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to user_posts_path(current_user)
   end
 
 

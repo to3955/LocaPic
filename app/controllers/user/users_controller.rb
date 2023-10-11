@@ -43,9 +43,14 @@ class User::UsersController < ApplicationController
     redirect_to root_path
   end
 
+  private
+
   def post_params
   params.require(:post).permit(:caption, :image, :new_location_name, :new_location_description)
   end
 
+  def user_params
+  params.require(:user).permit(:last_name, :first_name, :email, :is_deleted)  # 必要な属性を適切に設定
+  end
 
 end

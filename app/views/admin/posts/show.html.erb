@@ -1,0 +1,36 @@
+<h1>詳細</h1>
+
+<dl>
+  <dt>投稿ID:</dt>
+  <dd><%= @post.id %></dd>
+
+  <% if @user %>
+    <dt>ユーザー:</dt>
+    <dd><%= @user.last_name + @user.first_name %></dd>
+  <% end %>
+
+  <dt>キャプション:</dt>
+  <dd><%= @post.caption %></dd>
+
+  <dt>コメント数:</dt>
+  <dd><%= @replies.count %></dd>
+
+  <dt>コメント内容:</dt>
+  <% @replies.each do |reply| %>
+  <div class="reply">
+    <p><%= reply.comment %></p>
+    <% if current_user == reply.user %>
+      <%= link_to "削除", admin_reply_path(reply), method: :delete, data: { confirm: "このリプライを削除しますか？" } %>
+    <% end %>
+  </div>
+<% end %>
+
+
+  <dt>いいねの数:</dt>
+  <dd><%= @likes %></dd>
+</dl>
+
+<div class="button-container">
+  <%= link_to "削除", admin_post_path(@post), method: :delete, data: { confirm: "この投稿を削除しますか？" }, class: "btn btn-danger" %>
+  <%= link_to "一覧に戻る", admin_posts_path, class: "btn btn-secondary" %>
+</div>

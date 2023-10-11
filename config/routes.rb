@@ -28,11 +28,11 @@ devise_scope :user do
   get '/searches/search', to: 'searches#search', as: 'search'
   resources :searches, only: [:index]
   resources :posts do
-  resources :replies, only: [:create, :destroy]
-  resource :likes, only: [:create, :destroy]
-  member do
+    member do
       get 'show_detail' # 詳細ページへのルートを追加
     end
+  resources :replies, only: [:create, :destroy]
+  resource :likes, only: [:create, :destroy]
   end
    get'users/mypage', :to =>'users#show'
    get 'information/edit', to: 'users#edit', as: 'edit_information'
@@ -56,7 +56,8 @@ devise_scope :user do
 
     root to: "homes#top"
     resources :users, only: [:index, :show, :edit, :update]
-    resources :posts, only: [:index, :destroy]
+    resources :posts, only: [:index, :show, :destroy]
+    resources :replies, only: [:destroy]
   end
 
  end

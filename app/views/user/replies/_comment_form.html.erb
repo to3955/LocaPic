@@ -1,6 +1,1 @@
-<div>
-  <%= form_with model: [post, Reply.new], remote: true do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
-</div>
+<td>コメント件数:<span id="comment_count"><%= post.post_comments.count %></span></td>

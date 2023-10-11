@@ -1,0 +1,20 @@
+<h1>詳細ページ</h1>
+<div class="post">
+  <%= image_tag @post.image, width: 300, height: 300 %>
+  <h2><%= @post.caption %></h2>
+  <% if @post.location %>
+    <p>場所: <%= @post.location.place_name %></p>
+    <p>説明: <%= @post.location.description %></p>
+  <% else %>
+    <p>場所情報がありません</p>
+  <% end %>
+
+  <p>いいねの数: <%= @like_counts[@post.id] %></p>
+  <p>コメントの数: <%= @comment_counts[@post.id] %></p>
+  <div id="like_buttons_<%= @post.id %>">
+    <%= render 'user/likes/btn', {post: @post, current_user: current_user} %>
+  </div>
+  <div>
+     <%= render 'user/replies/form', post: @post %>
+  </div>
+</div>
