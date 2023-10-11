@@ -1,0 +1,6 @@
+<div id="post-comments">
+  <%= render "user/posts/show_detail" , { post: @post , reply: @reply } %><br>
+</div>
+<div id="comment-form">
+  <%= render "/form" , { post: @post , reply: @reply } %>
+</div>

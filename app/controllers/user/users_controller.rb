@@ -23,6 +23,7 @@ class User::UsersController < ApplicationController
       redirect_to user_path(current_user.id)
     end
   end
+  
 
   def update
     @user = current_user
