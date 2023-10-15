@@ -1,19 +1,32 @@
 class User::RepliesController < ApplicationController
+  before_action :authenticate_user!
   before_action :check_guest, only: [:create, :destroy]
 
   def create
-   @post = Post.find(params[:post_id])
-   @user = @post.user
-   @reply = current_user.replies.new(reply_params)
-   @reply.post_id = @post.id
-   @reply.save
+   post = Post.find(params[:post_id])
+   reply = current_user.replies.new(reply_params)
+   reply.post_id = post.id
+   reply.save
+
+   @comments_count = post.replies.count
+   @replies = post.replies
   end
 
   def destroy
-    @reply = Reply.find(params[:id]).destroy
-    @reply.destroy
-    @post = Post.find(params[:post_id])
+   post = Post.find(params[:post_id])
+   reply = post.replies.find(params[:id])
+   reply.post_id = post.id
+    if current_user == reply.user
+      reply.destroy
+      @comments_count = post.replies.count
+      @replies = post.replies
+      @post = post  # @post変数を設定
+    end
   end
+
+
+
+
 
   private
 

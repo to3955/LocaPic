@@ -1,0 +1,10 @@
+<div class="reply">
+  <div class="user-profile">
+    <%= image_tag reply.user.profile_image, width: 50, height: 50, class: "profile-image" %>
+    <p><%= reply.user.last_name + reply.user.first_name %></p>
+  </div>
+  <p><%= reply.comment %></p>
+  <% if current_user == reply.user %>
+   <%= link_to "削除", post_reply_path(reply, reply), method: :delete, remote: true, data: { confirm: "このリプライを削除しますか？" } %>
+  <% end %>
+</div>

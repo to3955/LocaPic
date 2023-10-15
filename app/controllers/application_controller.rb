@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     # 管理者ユーザーをログアウト
     sign_out(current_user) if current_user.admin?
     # リダイレクト先を設定し、成功メッセージを表示
-    redirect_to new_user_session_path, notice: "管理者ユーザーとしてログアウトしました。"
+    redirect_to admin_session_path, notice: "管理者ユーザーとしてログアウトしました。"
   end
 
 

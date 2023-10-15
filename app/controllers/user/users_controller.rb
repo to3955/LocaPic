@@ -3,8 +3,13 @@ class User::UsersController < ApplicationController
   before_action :check_guest, only: [:show]
 
   def show
-    @user = current_user
+   if params[:id].present?
+     @user = User.find(params[:id])
+   else
+     @user = current_user
+   end
   end
+
 
   def follows
     @user = User.find(params[:id])

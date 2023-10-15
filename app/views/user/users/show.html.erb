@@ -27,6 +27,7 @@
   </div>
   <div class="text-center">
     <%= link_to "自分の投稿一覧", post_path(current_user), class: "btn btn-primary mt-3" %>
+    <%= link_to "いいねした投稿一覧", user_likes_path, class: "btn btn-primary mt-3" %>
     <%= link_to "フォロー一覧", follows_user_path(@user), class: "btn btn-info mt-3 ml-3" %>
     <%= link_to "フォロワー一覧", followers_user_path(@user), class: "btn btn-info mt-3 ml-3" %>
   </div>

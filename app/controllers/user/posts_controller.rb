@@ -50,6 +50,13 @@ class User::PostsController < ApplicationController
 
   def show
     @posts = current_user.posts
+    # @post = Post.find(params[:id])
+    # @like_counts = {}  # 空のハッシュを作成
+    # # 各投稿に対するいいねの数を設定
+    # @like_counts[@post.id] = @post.likes.count
+    # @comment_counts = {}
+    # @comment_counts[@post.id] = @post.replies.count
+
   end
 
   def show_detail
@@ -63,6 +70,8 @@ class User::PostsController < ApplicationController
     # 特定の投稿のコメント数（Replyの数）を取得
     @comment_counts = {}
     @comment_counts[@post.id] = @post.replies.count
+     # 特定の投稿に関連するコメントを取得
+     @replies = @post.replies
   end
 
 

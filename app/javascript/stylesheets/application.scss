@@ -1,1 +1,14 @@
 @use '~bootstrap/scss/bootstrap';
+
+.post-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* 投稿を中央に配置 */
+  gap: 20px; /* 投稿の間に余白を追加 */
+}
+
+.post {
+  border: 1px solid #ccc; /* 枠線を追加 */
+  padding: 10px; /* 投稿の内側に余白を追加 */
+  text-align: center; /* テキストを中央に配置 */
+}

@@ -1,25 +1,31 @@
-<h1>詳細ページ</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="post">
+        <%= image_tag @post.image, width: 300, height: 300 %>
+        <h2><%= @post.caption %></h2>
+        <% if @post.location %>
+          <p>場所: <%= @post.location.place_name %></p>
+          <p>説明: <%= @post.location.description %></p>
+        <% else %>
+          <p>場所情報がありません</p>
+        <% end %>
 
-<div class="post">
-  <%= image_tag @post.image, width: 300, height: 300 %>
-  <h2><%= @post.caption %></h2>
-  <% if @post.location %>
-    <p>場所: <%= @post.location.place_name %></p>
-    <p>説明: <%= @post.location.description %></p>
-  <% else %>
-    <p>場所情報がありません</p>
-  <% end %>
-
-  <p>いいねの数: <%= @like_counts[@post.id] %></p>
-  <p>コメントの数: <%= @comment_counts[@post.id] %></p>
-  <div id="like_buttons_<%= @post.id %>">
-    <%= render 'user/likes/btn', {post: @post, current_user: current_user} %>
+        <p>いいねの数: <%= @like_counts[@post.id] %></p>
+        <p>コメントの数: <span id="comments_count"><%= @comment_counts[@post.id] %></span></p>
+        <div id="like_buttons_<%= @post.id %>">
+          <%= render 'user/likes/btn', {post: @post, current_user: current_user} %>
+        </div>
+        <div>
+          <%= render 'user/replies/form', post: @post %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <p>コメント内容:</p>
+      <div id="comments">
+       <%= render partial: "user/replies/reply", collection: @replies, as: :reply %>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= render 'user/replies/form', post: @post %>
-  </div>
-</div>
-
-<div id="post-comments" class="d-flex">
-  <%= render %>
 </div>

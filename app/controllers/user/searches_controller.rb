@@ -3,19 +3,15 @@ class User::SearchesController < ApplicationController
   def index
   end
 
+  def search
+    @range = params[:range]
+    @word = params[:word]
 
- def search
-   exit
-   @range = params[:range]
-   @word = params[:word]
-
-   if @range == "User"
+    if @range == "User"
       @users = User.looks(params[:search], params[:word])
-   else
+    else
       @posts = Post.looks(params[:search], params[:word])
-   end
-
-
- end
+    end
+  end
 
 end

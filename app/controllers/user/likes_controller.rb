@@ -3,7 +3,8 @@ class User::LikesController < ApplicationController
   before_action :check_guest, only: [:create, :destro]
 
   def index
-    @liked_posts = current_user.likes.map(&:post)
+    @user = current_user
+    @liked_posts = @user.liked_posts
   end
 
   def create
@@ -19,7 +20,7 @@ class User::LikesController < ApplicationController
     like = current_user.likes.find_by(post_id: @post.id)
     like.destroy
   end
-  
+
   def check_guest
     if current_user.guest?
       # ゲストユーザーの場合、アクセスを制限

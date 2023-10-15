@@ -10,6 +10,7 @@ devise_for :user,skip: [:passwords], controllers: {
   registrations: "user/registrations",
   sessions: 'user/sessions'
 }
+
 post 'user/guest_login', to: 'user/sessions#guest_login'
 
 # 管理者用
@@ -26,29 +27,32 @@ devise_scope :user do
   get 'home/about', to: 'user/homes#about', as: 'about' # モジュール構造を含めて正確に指定
 
   scope module: :user do
-  get 'search', to: 'search#search', as: 'search'
+  get '/search', to: 'searches#search'
   resources :searches, only: [:index]
   resources :posts do
     member do
       get 'show_detail' # 詳細ページへのルートを追加
     end
-  resources :replies, only: [:create, :destroy]
-  resource :likes, only: [:create, :destroy]
+    resources :replies, only: [:create, :destroy]
+    resource :likes, only: [:create, :destroy]
   end
-   get'users/mypage', :to =>'users#show'
-   get 'information/edit', to: 'users#edit', as: 'edit_information'
-   patch 'users/information' => "users#update"
-   post 'users/confirm' => "users#confirm"
-   patch 'users/out' => "users#out"
+
+  get 'users/likes', to: 'likes#index', as: 'user_likes' # いいね一覧へのルートを追加
+  get 'users/mypage', :to => 'users#show'
+  get 'information/edit', to: 'users#edit', as: 'edit_information'
+  patch 'users/information' => "users#update"
+  post 'users/confirm' => "users#confirm"
+  patch 'users/out' => "users#out"
+
   resources :users do
     member do
       get :follows, :followers
     end
-      resource :relationships, only: [:index, :create, :destroy]
-    end
-  resources :locations, only: [:index, :show]
-
+    resource :relationships, only: [:index, :create, :destroy]
   end
+
+  resources :locations, only: [:index, :show]
+end
 
 
    namespace :admin do

@@ -22,4 +22,8 @@ class Post < ApplicationRecord
     likes.count
   end
 
+  def comment_count
+    replies.count
+  end
+
 end

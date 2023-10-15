@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :replies, dependent: :destroy
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
 
   GUEST_USER_EMAIL = "guest@example.com"
 
@@ -77,6 +78,12 @@ end
     user.first_name_kana = "ユーザー"
     # その他の属性を設定する場合はここで設定
     end
+  end
+
+  def send_message(subject, content, sender)
+    # ここにメッセージ送信の処理を追加
+    # 例: メッセージをデータベースに保存する
+    Message.create(subject: subject, content: content, sender: sender, recipient: self)
   end
 
 

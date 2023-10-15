@@ -1,16 +1,33 @@
 <% @posts.each do |post| %>
-  <div class="post">
-    <%= image_tag post.image, width: 300, height: 300 %>
-    <h2><%= post.caption %></h2>
-    <% if post.location %>
-      <p>場所: <%= post.location.place_name %></p>
-      <p>説明: <%= post.location.description %></p>
-    <% else %>
-      <p>場所情報がありません</p>
-    <% end %>
-    
-    <% if post.user == current_user %>
-      <%= link_to "削除", post_path(post), method: :delete %>
-    <% end %>
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <%= image_tag post.image, class: "card-img-top", alt: "投稿画像" %>
+      <div class="card-body">
+        <h2 class="card-title"><%= post.caption %></h2>
+        <% if post.location %>
+          <p class="card-text">場所: <%= post.location.place_name %></p>
+          <p class="card-text">説明: <%= post.location.description %></p>
+        <% else %>
+          <p class="card-text">場所情報がありません</p>
+        <% end %>
+
+        <!-- いいねの数を表示 -->
+        <p class="card-text">いいね: <%= post.likes_count %></p>
+
+        <!-- コメント数を表示 -->
+        <p class="card-text">コメント数: <%= post.comment_count %></p>
+
+        <!-- コメント内容を表示 -->
+        <ul>
+          <% post.replies.each do |reply| %>
+            <li><%= reply.comment %></li>
+          <% end %>
+        </ul>
+
+        <% if post.user == current_user %>
+          <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>

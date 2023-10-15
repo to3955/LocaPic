@@ -1,34 +1,37 @@
-<!DELETE html>
-<html long="ja">
+<!DOCTYPE html>
+<html lang="ja">
   <head>
-  <title>Your App Name</title>
-  <%= stylesheet_link_tag 'application' %>
-  <%= csrf_meta_tags %>
+    <title>LocaPic</title>
+    <%= stylesheet_link_tag 'application' %>
+    <%= csrf_meta_tags %>
+    <!-- Bootstrap CSS を追加 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   </head>
-
- <body>
-
-<h1>投稿一覧</h1>
-
-    <div class="post-container">
-      <% @posts.each do |post| %>
-        <div class="post">
-          <%= image_tag post.image, width: 300, height: 300 %>
-          <h2><%= post.caption %></h2>
-          <% if post.location %>
-            <p>場所: <%= post.location.place_name %></p>
-            <p>説明: <%= post.location.description %></p>
-          <% else %>
-            <p>場所情報がありません</p>
-          <% end %>
-          <p>いいねの数: <%= @like_counts[post.id] %></p>
-          <p>コメントの数: <%= @comment_counts[post.id] %></p>
-        </div>
-        <div>
-          <%= link_to "詳細を表示", show_detail_post_path(post), class: "btn btn-primary" %>
-          <div id="like_buttons_<%= post.id %>"><%= render 'user/likes/btn', {post: post, current_user: current_user} %></div>
-        </div>
-      <% end %>
+  <body>
+    <div class="container"> <!-- コンテンツを中央に配置 -->
+      <h1 class="text-center">投稿一覧</h1>
+      <div class="post-container">
+        <% @posts.each do |post| %>
+          <div class="post card mb-3"> <!-- 投稿を枠で囲む -->
+            <div class="card-body">
+              <%= image_tag post.image, class: "img-fluid", alt: "投稿画像" %> <!-- 画像のレスポンシブ対応 -->
+              <h2><%= post.caption %></h2>
+              <% if post.location %>
+                <p>場所: <%= post.location.place_name %></p>
+                <p>説明: <%= post.location.description %></p>
+              <% else %>
+                <p>場所情報がありません</p>
+              <% end %>
+              <p>いいねの数: <%= @like_counts[post.id] %></p>
+              <p>コメントの数: <%= @comment_counts[post.id] %></p>
+            </div>
+            <div class="card-footer">
+              <%= link_to "詳細を表示", show_detail_post_path(post), class: "btn btn-primary" %>
+              <div id="like_buttons_<%= post.id %>"><%= render 'user/likes/btn', {post: post, current_user: current_user} %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
- </body>
+  </body>
 </html>
