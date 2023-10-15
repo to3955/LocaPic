@@ -12,11 +12,10 @@
         <% end %>
 
         <!-- いいねの数を表示 -->
-        <p class="card-text">いいね: <%= post.likes_count %></p>
+        <p>いいねの数: <%= @like_counts[@post.id] %></p>
 
         <!-- コメント数を表示 -->
-        <p class="card-text">コメント数: <%= post.comment_count %></p>
-
+        <p>コメントの数: <span id="comments_count"><%= @comment_counts[@post.id] %></span></p>
         <!-- コメント内容を表示 -->
         <ul>
           <% post.replies.each do |reply| %>

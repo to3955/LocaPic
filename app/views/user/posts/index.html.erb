@@ -14,7 +14,7 @@
         <% @posts.each do |post| %>
           <div class="post card mb-3"> <!-- 投稿を枠で囲む -->
             <div class="card-body">
-              <%= image_tag post.image, class: "img-fluid", alt: "投稿画像" %> <!-- 画像のレスポンシブ対応 -->
+             <%= image_tag post.image, class: "img-fluid", style: "max-width: 300px;", alt: "投稿画像" %> <!-- 画像のレスポンシブ対応 -->
               <h2><%= post.caption %></h2>
               <% if post.location %>
                 <p>場所: <%= post.location.place_name %></p>

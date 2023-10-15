@@ -12,3 +12,8 @@
   padding: 10px; /* 投稿の内側に余白を追加 */
   text-align: center; /* テキストを中央に配置 */
 }
+
+.custom-image {
+  max-width: 100px; /* 画像の最大幅を調整 */
+  height: auto; /* 高さは自動調整 */
+}

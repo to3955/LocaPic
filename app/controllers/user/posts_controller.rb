@@ -34,28 +34,38 @@ class User::PostsController < ApplicationController
 
 
   def index
-    @posts = Post.all
     @post = Post.new
+
+    # フォローしているユーザーのIDを取得
+   followings_user_ids = current_user.followings.pluck(:id)
+
+    # フォローしているユーザーの投稿一覧を取得
+    @posts = Post.where(user_id: followings_user_ids)
 
     @like_counts = {}
     @posts.each do |post|
     @like_counts[post.id] = post.likes.count
     end
- # 各投稿のコメント数（Replyの数）を取得
+
+    # 各投稿のコメント数（Replyの数）を取得
     @comment_counts = {}
     @posts.each do |post|
     @comment_counts[post.id] = post.replies.count
     end
   end
 
+
   def show
+    @post = Post.find(params[:id])
     @posts = current_user.posts
-    # @post = Post.find(params[:id])
-    # @like_counts = {}  # 空のハッシュを作成
-    # # 各投稿に対するいいねの数を設定
-    # @like_counts[@post.id] = @post.likes.count
-    # @comment_counts = {}
-    # @comment_counts[@post.id] = @post.replies.count
+    @like_counts = {}
+    @like_counts[@post.id] = @post.likes.count
+
+    # 特定の投稿のコメント数（Replyの数）を取得
+    @comment_counts = {}
+    @comment_counts[@post.id] = @post.replies.count
+     # 特定の投稿に関連するコメントを取得
+     @replies = @post.replies
 
   end
 
