@@ -1,2 +1,2 @@
 $('#comments_count').html("<%= @comments_count %>");
-$('#comments_<%= @post.id %>').html("<%= j(render partial: "user/replies/reply", collection: @replies, as: :reply) %>");
+$('#comments').html("<%= j(render partial: "user/replies/reply", collection: @replies, as: :reply) %>");
