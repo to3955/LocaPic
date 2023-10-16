@@ -26,4 +26,18 @@ class Post < ApplicationRecord
     replies.count
   end
 
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post = Post.where("place_name = ?", word)
+    elsif search == "forward_match"
+      @post = Post.where("place_name LIKE ?", "#{word}%")
+    elsif search == "backward_match"
+      @post = Post.where("place_name LIKE ?", "%#{word}")
+    elsif search == "partial_match"
+      @post = Post.where("place_name LIKE ?", "%#{word}%")
+    else
+      @post = Post.all
+    end
+  end
+
 end

@@ -51,7 +51,7 @@ devise_scope :user do
     resource :relationships, only: [:index, :create, :destroy]
   end
 
-  resources :locations, only: [:index, :show]
+  resources :locations, only: [:new, :index, :show]
 end
 
 

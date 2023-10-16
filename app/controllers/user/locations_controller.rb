@@ -1,4 +1,8 @@
 class User::LocationsController < ApplicationController
+  
+  def new
+  end  
+  
   def index
   end
 

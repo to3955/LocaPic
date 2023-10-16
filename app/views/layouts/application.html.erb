@@ -16,7 +16,8 @@
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand p-3" href="/"></a>
+          <a class="navbar-brand p-3" href="/" style="background-image: url('/assets/IMG_2729.jpeg'); background-size: cover;">
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -60,6 +61,11 @@
               <li class="nav-item">
                 <%= link_to new_post_path do %>
                 <i class="fa-solid fa-cookie-bite">投稿</i>
+                <% end %>
+              </li>
+               <li class="nav-item">
+                <%= link_to locations_path do %>
+                <i class="fa-solid fa-cookie-bite">地図</i>
                 <% end %>
               </li>
               <li class="nav-item">
