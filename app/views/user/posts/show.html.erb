@@ -12,7 +12,7 @@
         <% end %>
 
         <!-- いいねの数を表示 -->
-        <p>いいねの数: <%= @like_counts[@post.id] %></p>
+        <p>いいねの数: <span id="likes_count"><%= @like_counts[@post.id] %></span></p>
 
         <!-- コメント数を表示 -->
         <p>コメントの数: <span id="comments_count"><%= @comment_counts[@post.id] %></span></p>

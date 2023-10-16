@@ -13,10 +13,10 @@
       <tr>
         <td>
           <%= link_to user_path(user) do %>
-            <%= image_tag user.get_profile_image(50,50) %>
+            <%= image_tag user.get_profile_image(50, 50) %>
           <% end %>
         </td>
-        <td><%= @user.last_name %><%= @user.first_name %></td>
+        <td><%= user.last_name %><%= user.first_name %></td>
         <td>
           <%= link_to follows_user_path(user) do %>
             <p>フォロー<%= user.followings.count %></p>

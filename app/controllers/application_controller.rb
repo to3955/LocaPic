@@ -13,13 +13,25 @@ class ApplicationController < ActionController::Base
     redirect_to admin_session_path, notice: "管理者ユーザーとしてログアウトしました。"
   end
 
-
   def after_sign_in_path_for(resource)
-    users_mypage_path
+    # ログイン後の遷移先を設定
+    if resource == current_admin
+      # 管理者ユーザーの場合、/admin/usersにリダイレクト
+      admin_users_path
+    else
+      # 通常のユーザーの場合、通常の遷移先にリダイレクト
+      users_mypage_path
+    end
   end
 
   def after_sign_out_path_for(resource)
+    if resource == :admin
+      # 管理者ユーザーの場合、ログアウト後に/adminにリダイレクト
+      new_admin_session_path
+    else
+      # 通常のユーザーの場合、ログアウト後にroot_pathにリダイレクト
     root_path
+    end
   end
 
   def guest_sign_in

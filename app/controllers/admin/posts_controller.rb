@@ -8,7 +8,9 @@ class Admin::PostsController < ApplicationController
     @post = Post.find(params[:id]) # 投稿の情報を取得
     @user = @post.user if @post.user # 投稿者の情報を取得
     @replies = @post.replies
+    @likes = @post.likes
   end
+
 
   def destroy
     @post = Post.find(params[:id])
@@ -25,3 +27,4 @@ class Admin::PostsController < ApplicationController
     redirect_to admin_posts_path, notice: '投稿が削除されました'
   end
 end
+

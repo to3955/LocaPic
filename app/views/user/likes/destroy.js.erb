@@ -1,1 +1,2 @@
 $('#like_buttons_<%= @post.id %>').html("<%= j(render "btn", {post: @post, current_user: @user}) %>");
+$('#likes_count').html("<%= @likes_count %>");

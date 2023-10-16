@@ -1,36 +1,50 @@
-<h1>詳細</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <dl>
+        <% if @user %>
+          <dt>ユーザー:</dt>
+          <dd>
+            <%= link_to admin_user_path(@user) do %>
+              <%= image_tag @user.profile_image, width: 50, height: 50, class: "profile-image" %>
+            <% end %>
+            <%= @user.last_name + @user.first_name %>
+          </dd>
+        <% end %>
+          <dt>いいねの数:</dt>
+          <dd><%= @likes.count %></dd>
+          <dt>コメント数:</dt>
+          <dd><%= @replies.count %></dd>
+    </div>
+    <div class="col-8">
+      <div class="row">
+  　　   <div class="col-12">
+         <dt>投稿ID:</dt>
+        <dd><%= @post.id %></dd>
+        <dt>写真:</dt>
+        <dd><%= image_tag @post.image, width: 300, height: 300 %></dd>
+  　　   </div>
+      </div>
+      <div class="button-container mt-3">
+          <%= link_to "削除", admin_post_path(@post), method: :delete, data: { confirm: "この投稿を削除しますか？" }, class: "btn btn-danger" %>
+          <%= link_to "一覧に戻る", admin_posts_path, class: "btn btn-secondary" %>
+      </div>
+      <div class="row">
+        <div class="col-4">
+　　　　    <dt>キャプション:</dt>
+            <dd><%= @post.caption %></dd>
+        </div>
+        <div class="col-4">
+          <dt>コメント内容:</dt>
+           <% @replies.each do |reply| %>
+          <div class="reply">
+            <p><%= reply.comment %></p>
+            <%= link_to "削除", admin_reply_path(reply), method: :delete, data: { confirm: "このリプライを削除しますか？" }, class: "text-danger" %>
+          </div>
+        <% end %>
 
-<dl>
-  <dt>投稿ID:</dt>
-  <dd><%= @post.id %></dd>
-
-  <% if @user %>
-    <dt>ユーザー:</dt>
-    <dd><%= @user.last_name + @user.first_name %></dd>
-  <% end %>
-
-  <dt>キャプション:</dt>
-  <dd><%= @post.caption %></dd>
-
-  <dt>コメント数:</dt>
-  <dd><%= @replies.count %></dd>
-
-  <dt>コメント内容:</dt>
-  <% @replies.each do |reply| %>
-  <div class="reply">
-    <p><%= reply.comment %></p>
-    <% if current_user == reply.user %>
-      <%= link_to "削除", admin_reply_path(reply), method: :delete, data: { confirm: "このリプライを削除しますか？" } %>
-    <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
-
-
-  <dt>いいねの数:</dt>
-  <dd><%= @likes %></dd>
-</dl>
-
-<div class="button-container">
-  <%= link_to "削除", admin_post_path(@post), method: :delete, data: { confirm: "この投稿を削除しますか？" }, class: "btn btn-danger" %>
-  <%= link_to "一覧に戻る", admin_posts_path, class: "btn btn-secondary" %>
 </div>

@@ -2,12 +2,14 @@ class Admin::RepliesController < ApplicationController
 
   def destroy
     @reply = Reply.find(params[:id])
-    if current_user.admin? || current_user == @reply.user
+    post = @reply.post
+    if current_user == @reply.user
       @reply.destroy
-      redirect_to admin_post_path(@reply.post), notice: "リプライを削除しました。"
+      flash[:success] = "コメントを削除しました。"
     else
-      redirect_to admin_post_path(@reply.post), alert: "リプライを削除できませんでした。"
+      flash[:error] = "コメントの削除に失敗しました。"
     end
+    redirect_to admin_post_path(post)
   end
 
 end
