@@ -33,6 +33,16 @@
               <%= form.label :place_name, '場所名' %>
               <%= form.text_field :place_name, class: "form-control" %>
             </div>
+            
+            <div class="form-group">
+              <%= form.label :location_id, '既存のロケーションを選択' %>
+              <%= form.collection_select :location_id, Location.all, :id, :place_name, { include_blank: true }, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= form.label :new_location_name, '新しいロケーション名' %>
+              <%= form.text_field :new_location_name, class: "form-control" %>
+            </div>
 
             <div class="form-group">
               <%= form.label :address, '住所' %>
