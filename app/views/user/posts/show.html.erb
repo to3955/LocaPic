@@ -1,32 +1,45 @@
-<% @posts.each do |post| %>
-  <div class="col-md-4 mb-3">
-    <div class="card">
-      <%= image_tag post.image, class: "card-img-top", alt: "投稿画像" %>
-      <div class="card-body">
-        <h2 class="card-title"><%= post.caption %></h2>
-        <% if post.location %>
-          <p class="card-text">場所: <%= post.location.place_name %></p>
-          <p class="card-text">説明: <%= post.location.description %></p>
-        <% else %>
-          <p class="card-text">場所情報がありません</p>
-        <% end %>
+ <html>
+   <!DOCTYPE html>
+   <head>
+   <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+   <body>
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <%= link_to show_detail_post_path(post) do %>
+            <%= image_tag post.image, class: "card-img-top", alt: "投稿画像" %>
+            <% end %>
+            <div class="card-body">
+              <h2 class="card-title"><%= post.caption %></h2>
+              <% if post.location %>
+                <p class="card-text">場所: <%= post.location.place_name %></p>
+                <p class="card-text">説明: <%= post.location.description %></p>
+              <% else %>
+                <p class="card-text">場所情報がありません</p>
+              <% end %>
 
-        <!-- いいねの数を表示 -->
-        <p>いいねの数: <span id="likes_count"><%= @like_counts[@post.id] %></span></p>
+              <!-- いいねの数を表示 -->
+              <p>いいねの数: <span id="likes_count"><%= @like_counts[post.id] %></span></p>
 
-        <!-- コメント数を表示 -->
-        <p>コメントの数: <span id="comments_count"><%= @comment_counts[@post.id] %></span></p>
-        <!-- コメント内容を表示 -->
-        <ul>
-          <% post.replies.each do |reply| %>
-            <li><%= reply.comment %></li>
-          <% end %>
-        </ul>
+              <!-- コメント数を表示 -->
+              <p>コメントの数: <span id="comments_count"><%= @comment_counts[post.id] %></span></p>
 
-        <% if post.user == current_user %>
-          <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-danger" %>
-        <% end %>
-      </div>
+              <!-- コメント内容を表示 -->
+              <ul>
+                <% post.replies.each do |reply| %>
+                  <li><%= reply.comment %></li>
+                <% end %>
+              </ul>
+
+              <% if post.user == current_user %>
+                <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-danger" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-  </div>
-<% end %>
+  </body>
+</html>

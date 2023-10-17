@@ -1,0 +1,12 @@
+<h1>検索履歴</h1>
+
+<ul>
+  <% @search_history.each do |history| %>
+    <li>
+      <%= link_to history.query, { controller: 'searches', action: 'search', word: history.query, range: 'User' } %>
+      <span class="timestamp"><%= history.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
+    </li>
+  <% end %>
+</ul>
+
+

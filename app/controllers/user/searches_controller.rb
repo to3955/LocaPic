@@ -1,6 +1,7 @@
 class User::SearchesController < ApplicationController
 
   def index
+    @search_history = current_user.search_histories.order(created_at: :desc)
   end
 
   def search
@@ -12,6 +13,7 @@ class User::SearchesController < ApplicationController
     else
       @posts = Post.looks(params[:search], params[:word])
     end
+      current_user.search_histories.create(query: @word)
   end
 
 end

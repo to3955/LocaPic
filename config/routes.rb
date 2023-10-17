@@ -29,6 +29,7 @@ devise_scope :user do
   scope module: :user do
   get '/search', to: 'searches#search'
   resources :searches, only: [:index]
+  get 'users/posts' => 'posts#show'
   resources :posts do
     member do
       get 'show_detail' # 詳細ページへのルートを追加
