@@ -13,7 +13,7 @@ class User::SearchesController < ApplicationController
     else
       @posts = Post.looks(params[:search], params[:word])
     end
-      current_user.search_histories.create(query: @word)
+      current_user.search_histories.create(term: @word)
   end
 
 end

@@ -3,7 +3,7 @@
 <ul>
   <% @search_history.each do |history| %>
     <li>
-      <%= link_to history.query, { controller: 'searches', action: 'search', word: history.query, range: 'User' } %>
+      <%= link_to history.to_term, { controller: 'searches', action: 'search', word: history.term, range: 'User' } %>
       <span class="timestamp"><%= history.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
     </li>
   <% end %>
