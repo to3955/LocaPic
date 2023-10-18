@@ -1,5 +1,4 @@
 class Location < ApplicationRecord
-  belongs_to :post
 
   def self.search_by_place_and_address(search, word)
     if search == "perfect_match"

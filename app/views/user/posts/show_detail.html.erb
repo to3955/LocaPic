@@ -2,7 +2,9 @@
   <div class="row">
     <div class="col-md-8">
       <div class="post">
-        <%= image_tag @post.image, width: 300, height: 300 %>
+        <% if @post.image.attached? %>
+          <%= image_tag @post.image, width: 300, height: 300 %>
+          <%end%>
         <h2><%= @post.caption %></h2>
         <% if @post.location %>
           <p>場所: <%= @post.location.place_name %></p>

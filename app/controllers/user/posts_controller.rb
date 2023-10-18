@@ -17,18 +17,17 @@ class User::PostsController < ApplicationController
         Location.new(
           place_name: params[:post][:new_location_name],
           description: params[:post][:new_location_description],
-          latitude: params[:post][:new_location_latitude],
-          longitude: params[:post][:new_location_longitude]
+          latitude:  params[:post][:latitude],
+          longitude: params[:post][:longitude]
         )
       else
         Location.find_by(id: params[:post][:location_id])
       end
-
+   
       if @location && @location.save
-        @post = current_user.posts.build(
-          caption: params[:post][:caption],
-          location: @location
-        )
+        @post = Post.new(post_params)
+        @post.location_id = @location.id
+        @post.user_id = current_user.id
 
         if @post.save
           redirect_to show_detail_post_path(@post), notice: '投稿が作成されました'
@@ -109,7 +108,7 @@ class User::PostsController < ApplicationController
   private
 
  def post_params
-  params.require(:post).permit(:image, :caption, :new_location_name, :new_location_description, :new_location_latitude, :new_location_longitude)
+  params.require(:post).permit(:image, :caption, :new_location_name, :new_location_description)
  end
 
  def is_matching_login_user
