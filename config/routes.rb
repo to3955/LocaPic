@@ -42,7 +42,7 @@ devise_scope :user do
   get 'users/mypage', :to => 'users#show'
   get 'information/edit', to: 'users#edit', as: 'edit_information'
   patch 'users/information' => "users#update"
-  post 'users/confirm' => "users#confirm"
+  get 'users/confirm' => "users#confirm"
   patch 'users/out' => "users#out"
 
   resources :users do

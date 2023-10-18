@@ -1,6 +1,5 @@
 class User::LikesController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_guest, only: [:create, :destroy]
 
   def index
     @user = current_user
@@ -25,11 +24,6 @@ class User::LikesController < ApplicationController
     @lokes_count = post.likes.count
   end
 
-  def check_guest
-    if current_user.guest?
-      # ゲストユーザーの場合、アクセスを制限
-      redirect_to root_path, alert: "ゲストユーザーはこのアクションを実行できません。"
-    end
-  end
+
 
 end

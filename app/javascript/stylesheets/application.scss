@@ -53,3 +53,14 @@ left: 10px;
     margin-right: 10px; /* 例: 右に10pxのスペースを追加 */
     /* 他のスタイルを追加できます */
 }
+
+.square-border {
+  display: inline-block; /* ブロック要素をインラインブロックに変更 */
+  max-width: 80%; /* 最大幅を制限（適切な幅に調整） */
+  height: 200px; /* 正方形の高さ */
+  width: auto; /* 幅は自動で調整される */
+  border: 1px solid #000; /* 枠線のスタイル（任意） */
+  text-align: center; /* テキストを中央寄せ */
+  padding: 10px; /* テキストと枠の余白（任意） */
+}
+
