@@ -8,16 +8,23 @@ class User::PostsController < ApplicationController
     @location = Location.new # 新しい場所を入力するフォーム用
   end
 
-  def create
-    if params[:post][:new_location_name].present?
-      @location = Location.new(
-        place_name: params[:post][:new_location_name],
-        description: params[:post][:new_location_description],
-        latitude: params[:post][:new_location_latitude],
-        longitude: params[:post][:new_location_longitude]
-      )
+ def create
+    if params[:post].present? && (params[:post][:new_location_name].blank? && params[:post][:location_id].blank?)
+    flash[:alert] = '新しい場所を入力するか、既存の場所を選択してください。'
+    redirect_to new_user_post_path
+    else
+      @location = if params[:post][:new_location_name].present?
+        Location.new(
+          place_name: params[:post][:new_location_name],
+          description: params[:post][:new_location_description],
+          latitude: params[:post][:new_location_latitude],
+          longitude: params[:post][:new_location_longitude]
+        )
+      else
+        Location.find_by(id: params[:post][:location_id])
+      end
 
-      if @location.save
+      if @location && @location.save
         @post = current_user.posts.build(
           caption: params[:post][:caption],
           location: @location
@@ -31,39 +38,36 @@ class User::PostsController < ApplicationController
       else
         render :new
       end
-    else
-      @post = current_user.posts.build(post_params)
+    end
+ end
 
-      if @post.save
-        redirect_to show_detail_post_path(@post), notice: '投稿が作成されました'
+
+
+   def index
+      @post = Post.new
+
+      # フォローしているユーザーのIDを取得
+      followings_user_ids = current_user.followings.pluck(:id)
+
+      if followings_user_ids.present?
+        # フォローしているユーザーの投稿一覧を取得
+        @posts = Post.where(user_id: followings_user_ids)
       else
-        render :new
+        # フォローしているユーザーがいない場合は全ての投稿を取得
+        @posts = Post.all
       end
-    end
-  end
 
+      @like_counts = {}
+      @posts.each do |post|
+        @like_counts[post.id] = post.likes.count
+      end
 
-  def index
-    @post = Post.new
-
-    # フォローしているユーザーのIDを取得
-   followings_user_ids = current_user.followings.pluck(:id)
-
-    # フォローしているユーザーの投稿一覧を取得
-    @posts = Post.where(user_id: followings_user_ids)
-
-    @like_counts = {}
-    @posts.each do |post|
-    @like_counts[post.id] = post.likes.count
-    end
-
-    # 各投稿のコメント数（Replyの数）を取得
-    @comment_counts = {}
-    @posts.each do |post|
-    @comment_counts[post.id] = post.replies.count
-    end
-  end
-
+      # 各投稿のコメント数（Replyの数）を取得
+      @comment_counts = {}
+      @posts.each do |post|
+        @comment_counts[post.id] = post.replies.count
+      end
+   end
 
   def show
     @posts = current_user.posts

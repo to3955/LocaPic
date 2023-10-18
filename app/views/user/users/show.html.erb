@@ -7,7 +7,7 @@
       <div class="row mb-2">
         <h3 class="col-2">登録情報</h3>
         <p>
-          <%= link_to "編集する", edit_information_path, class: "btn btn-success ml-5 pl-5 pr-5" %>
+          <%= link_to "edit", edit_information_path, class: "btn btn-success ml-5 pl-5 pr-5" %>
         </p>
       </div>
       <table class="table table-bordered">
@@ -26,9 +26,9 @@
     </div>
   </div>
   <div class="text-center">
-    <%= link_to "自分の投稿一覧", post_path(current_user), class: "btn btn-primary mt-3" %>
-    <%= link_to "いいねした投稿一覧", user_likes_path, class: "btn btn-primary mt-3" %>
-    <%= link_to "フォロー一覧", follows_user_path(@user), class: "btn btn-info mt-3 ml-3" %>
-    <%= link_to "フォロワー一覧", followers_user_path(@user), class: "btn btn-info mt-3 ml-3" %>
+    <%= link_to "List of my posts", post_path(current_user), class: "btn btn-primary mt-3" %>
+    <%= link_to "Posts you liked", user_likes_path, class: "btn btn-primary mt-3" %>
+    <%= link_to "Follow list", follows_user_path(@user), class: "btn btn-info mt-3 ml-3" %>
+    <%= link_to "Follower list", followers_user_path(@user), class: "btn btn-info mt-3 ml-3" %>
   </div>
 </div>

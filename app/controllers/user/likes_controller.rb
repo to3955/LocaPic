@@ -1,6 +1,6 @@
 class User::LikesController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_guest, only: [:create, :destro]
+  before_action :check_guest, only: [:create, :destroy]
 
   def index
     @user = current_user

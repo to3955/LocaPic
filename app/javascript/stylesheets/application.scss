@@ -17,3 +17,39 @@
   max-width: 100px; /* 画像の最大幅を調整 */
   height: auto; /* 高さは自動調整 */
 }
+
+
+
+
+
+footer {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            position: fixed; /* 追加 */
+            bottom: 0; /* 追加 */
+            width: 100%; /* 追加 */
+            height: 40px;
+        }
+
+body {
+          padding-bottom: 40px; /* フッターの高さと同じ値を指定 */
+     }
+
+.navbar-brand{
+position: fixed;
+top: 10px;
+left: 10px;
+}
+
+/* リンクの文字色を黒に変更 */
+.navbar-nav li a {
+    color: #000000; /* または color: black; */
+}
+
+/* リンクの間隔（横方向のスペース）を調整 */
+.navbar-nav li {
+    margin-right: 10px; /* 例: 右に10pxのスペースを追加 */
+    /* 他のスタイルを追加できます */
+}
