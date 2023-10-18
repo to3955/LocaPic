@@ -6,12 +6,23 @@
    <body>
     <div class="row">
       <% @posts.each do |post| %>
-        <div class="col-md-4 mb-3">
-          <div class="card">
+        <div class="col-md-2 mb-3">
+          <div class="card post-card">
             <%= link_to show_detail_post_path(post) do %>
             <%= image_tag post.image, class: "card-img-top", alt: "投稿画像" %>
             <% end %>
-            <div class="card-body">
+
+              <!-- いいねの数を表示 -->
+              <p>いいねの数: <span id="likes_count"><%= @like_counts[post.id] %></span></p>
+
+              <!-- コメント数を表示 -->
+              <p>コメントの数: <span id="comments_count"><%= @comment_counts[post.id] %></span></p>
+
+              <div class="text-center">
+                <button class="btn btn-primary view-more" data-target="#post<%= post.id %>">詳細を表示</button>
+              </div>
+              <!-- 場所情報の表示 -->
+              <div class="card-body post-detail" id="post<%= post.id %>" style="display: none;">
               <h2 class="card-title"><%= post.caption %></h2>
               <% if post.location %>
                 <p class="card-text">場所: <%= post.location.place_name %></p>
@@ -19,12 +30,6 @@
               <% else %>
                 <p class="card-text">場所情報がありません</p>
               <% end %>
-
-              <!-- いいねの数を表示 -->
-              <p>いいねの数: <span id="likes_count"><%= @like_counts[post.id] %></span></p>
-
-              <!-- コメント数を表示 -->
-              <p>コメントの数: <span id="comments_count"><%= @comment_counts[post.id] %></span></p>
 
               <!-- コメント内容を表示 -->
               <ul>
@@ -41,5 +46,14 @@
         </div>
       <% end %>
     </div>
+    <script>
+  $(document).ready(function() {
+    $('.view-more').click(function() {
+      var target = $($(this).data('target'));
+      target.toggle(); // 詳細部分の表示/非表示を切り替え
+    });
+  });
+</script>
+
   </body>
 </html>

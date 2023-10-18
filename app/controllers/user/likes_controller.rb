@@ -12,7 +12,7 @@ class User::LikesController < ApplicationController
     like = current_user.likes.new(post_id: @post.id)
     like.save
 
-    @likes_count = post.likes.count
+    @like_counts = @post.likes.count
   end
 
   def destroy
@@ -21,7 +21,7 @@ class User::LikesController < ApplicationController
     like = current_user.likes.find_by(post_id: @post.id)
     like.destroy
 
-    @lokes_count = post.likes.count
+    @like_counts = @post.likes.count
   end
 
 
