@@ -64,3 +64,12 @@ left: 10px;
   padding: 10px; /* テキストと枠の余白（任意） */
 }
 
+.search-form {
+  display: inline-block; /* フォームをインラインで表示 */
+  margin-right: 10px; /* フォームとリンクの間隔を調整 */
+}
+
+.search-history-link {
+  display: inline-block; /* リンクをインラインで表示 */
+}
+

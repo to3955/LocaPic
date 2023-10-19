@@ -1,11 +1,11 @@
 <table class="table table-hover table-inverse">
-  <!--検索対象モデルがUserの時 -->
   <% if @range == "User" %>
+    <!-- Userモデルの検索結果を表示 -->
     <h2>Users search for "<%= @word %>"</h2>
     <thead>
       <tr>
-        <th>image</th>
-        <th>name</th>
+        <th>Image</th>
+        <th>Name</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -17,30 +17,35 @@
               <%= image_tag user.get_profile_image(50, 50) %>
             <% end %>
           </td>
-          <td><%= user.last_name %><%= user.first_name %></td>
+          <td><%= user.last_name %> <%= user.first_name %></td>
         </tr>
       <% end %>
     </tbody>
   <% else %>
-    <!--検索対象モデルがUserではない時(= 検索対象モデルがlocationの時) -->
-    <h2>Posts search for "<%= @word %>"</h2>
+    <!-- Locationモデルの検索結果を表示 -->
+    <h2>Locations search for "<%= @word %>"</h2>
     <thead>
       <tr>
-        <th></th>
-        <th>場所</th>
-        <th>説明</th>
+        <th>Image</th> <!-- Userが存在する場合に表示 -->
+        <th>Place</th>
+        <th>Description</th>
       </tr>
     </thead>
     <tbody>
-      <% @posts.each do |post| %>
+      <% @locations.each do |location| %>
         <tr>
           <td>
-            <%= link_to user_path(post.user) do %>
-              <%= image_tag post.user.get_profile_image(50, 50) %>
+            <% if location.user.present? %>
+              <!-- Userが存在する場合の処理 -->
+              <%= link_to user_path(location.user) do %>
+                <%= image_tag location.user.get_profile_image(50, 50) %>
+              <% end %>
+            <% else %>
+              <!-- Userが存在しない場合の処理（例: 何も表示しない） -->
             <% end %>
           </td>
-          <td><%= link_to post.location.place_name, post_path(post.id) %></td>
-          <td><%= post.location.description %></td>
+          <td><%= link_to location.place_name, show_detail_post_path(location.id) %></td>
+          <td><%= location.description %></td>
         </tr>
       <% end %>
     </tbody>

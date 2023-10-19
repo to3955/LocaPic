@@ -1,5 +1,4 @@
 class User::SearchesController < ApplicationController
-
   def index
     @search_history = current_user.search_histories.order(created_at: :desc)
   end
@@ -9,11 +8,12 @@ class User::SearchesController < ApplicationController
     @word = params[:word]
 
     if @range == "User"
-      @users = User.looks(params[:search], params[:word])
+      @users = User.search_by_name(@word)
     else
-      @posts = Post.looks(params[:search], params[:word])
+      @locations = Location.search_by_place_name_or_address(@word)
     end
-      current_user.search_histories.create(term: @word)
-  end
 
+    current_user.search_histories.create(term: @word)
+  end
 end
+

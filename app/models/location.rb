@@ -1,6 +1,9 @@
 class Location < ApplicationRecord
 
-  def self.search_by_place_and_address(search, word)
+
+  has_many :posts
+
+  def self.looks(search, word)
     if search == "perfect_match"
       @locations = Location.where("place_name LIKE ? OR address LIKE ?", word, word)
     elsif search == "forward_match"
@@ -13,4 +16,5 @@ class Location < ApplicationRecord
       @locations = Location.all
     end
   end
+
 end

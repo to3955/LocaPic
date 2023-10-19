@@ -1,12 +1,20 @@
 <% if user_signed_in? %>
-  <div class="search_form">
-    <%= form_with url: search_path, method: :get, local: true do |f| %>
-      <%= f.text_field :word %>
-      <%= f.select :range, options_for_select([['User'], ['place_name']]) %>
-      <%= f.select :search, options_for_select([["完全一致", "perfect_match"], ["前方一致", "forward_match"], ["後方一致", "backward_match"], ["部分一致", "partial_match"]]) %>
-      <%= f.submit "検索", class: "btn-sm btn-primary" %>
-    <% end %>
+  <div class="col-xs-3">
+    <div class="search-form">
+      <%= form_with url: user_searches_search_path, method: :get, local: true do |f| %>
+        <div class="form-group">
+          <%= f.text_field :word, class: "form-control" %>
+        </div>
+        <br>
+        <div class="form-group">
+          <div class="select-box">
+            <%= f.label :search, "検索方法", class: "control-label" %>
+            <%= f.select :search, options_for_select([["完全一致", "perfect_match"], ["部分一致", "partial_match"]], selected: 'perfect_match'), {}, class: "form-control" %>
+          </div>
+        </div>
+        <br>
+        <%= f.submit "検索", class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
 <% end %>
-<div>
-  <%= link_to "検索履歴", searches_path %>

@@ -42,6 +42,7 @@
                   <i class="fas fa-sign-out-alt mr-2">Log out</i>
                 <% end %>
               </li>
+
             </div>
 
             <% elsif user_signed_in? %>
@@ -72,11 +73,9 @@
                 <% end %>
               </li>
 
-              <div class="search-form col-5 mt-2 ml-auto">
-                <%= render 'user/searches/search' %>
-              </div>
+              <%= render 'user/searches/search' %>
 
-            </div>
+　　　　 　 </div>
 
           <% else %>
             <li class="nav-item">
@@ -113,8 +112,7 @@
       </div>
 
     <main>
-
-    <%= yield %>
+        <%= yield %>
     </main>
      <footer class="shadow-sm" style="background-image: url('/assets/IMG_2817.jpeg'); background-size: cover;">
       <h3>LocaPic</h3>

@@ -9,9 +9,12 @@
         <div class="col-md-2 mb-3">
           <div class="card post-card">
             <%= link_to show_detail_post_path(post) do %>
-            <%= image_tag post.image, class: "card-img-top", alt: "投稿画像" %>
+              <% if post.image.present? %>
+                <%= image_tag post.image, class: "card-img-top", alt: "投稿画像" %>
+              <% else %>
+                 <%= image_tag (post.image.present? ? post.image : 'no_image.jpg'), class: "card-img-top", alt: "投稿画像" %>
+              <% end %>
             <% end %>
-
               <!-- いいねの数を表示 -->
               <p>いいねの数: <span id="likes_count"><%= @like_counts[post.id] %></span></p>
 

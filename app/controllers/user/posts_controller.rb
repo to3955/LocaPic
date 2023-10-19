@@ -8,13 +8,14 @@ class User::PostsController < ApplicationController
     @location = Location.new # 新しい場所を入力するフォーム用
   end
 
- def create
+  def create
     if params[:post].present? && (params[:post][:new_location_name].blank? && params[:post][:location_id].blank?)
-    flash[:alert] = '新しい場所を入力するか、既存の場所を選択してください。'
-    redirect_to new_user_post_path
+      flash[:alert] = '新しい場所を入力するか、既存の場所を選択してください。'
+      redirect_to new_user_post_path
     else
-      @location = if params[:post][:new_location_name].present?
-        Location.new(
+
+      if params[:post][:new_location_name].present?
+        @location =  Location.new(
           place_name: params[:post][:new_location_name],
           description: params[:post][:new_location_description],
           latitude:  params[:post][:latitude],
@@ -23,7 +24,6 @@ class User::PostsController < ApplicationController
       else
         Location.find_by(id: params[:post][:location_id])
       end
-   
       if @location && @location.save
         @post = Post.new(post_params)
         @post.location_id = @location.id
@@ -38,8 +38,7 @@ class User::PostsController < ApplicationController
         render :new
       end
     end
- end
-
+  end
 
 
    def index
@@ -100,7 +99,7 @@ class User::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to user_posts_path(current_user)
+    redirect_to users_posts_path(current_user)
   end
 
 
