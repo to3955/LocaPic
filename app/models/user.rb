@@ -49,20 +49,17 @@ end
     followings.include?(user)
   end
 
-  def self.looks(search, word)
-   if search == "perfect_match"
-     @user = User.where("last_name LIKE ? OR first_name LIKE ?", word, word)
-   elsif search == "forward_match"
-     @user = User.where("last_name LIKE ? OR first_name LIKE ?", "#{word}%", "#{word}%")
-   elsif search == "backward_match"
-     @user = User.where("last_name LIKE ? OR first_name LIKE ?", "%#{word}", "%#{word}")
-   elsif search == "partial_match"
-     @user = User.where("last_name LIKE ? OR first_name LIKE ?", "%#{word}%", "%#{word}%")
-   else
-     @user = User.all
-   end
+  def self.search_by_name(keyword)
+    if keyword.present?
+      where("last_name LIKE :keyword OR first_name LIKE :keyword", keyword: "%#{keyword}%")
+    else
+      all
+    end
   end
 
+  def full_name
+    "#{last_name} #{first_name}"
+  end
 
   def guest?
   # 通常のユーザーかどうかを判別する条件を記述

@@ -4,16 +4,16 @@ class User::SearchesController < ApplicationController
   end
 
   def search
-    @range = params[:range]
     @word = params[:word]
 
-    if @range == "User"
+    if @word.present?
       @users = User.search_by_name(@word)
-    else
       @locations = Location.search_by_place_name_or_address(@word)
+      current_user.search_histories.create(term: @word)
+    else
+      # キーワードが空の場合に何らかの処理を行うか、メッセージを表示することもできます
+      flash[:notice] = "キーワードを入力してください。"
+      redirect_to user_searches_index_path
     end
-
-    current_user.search_histories.create(term: @word)
   end
 end
-

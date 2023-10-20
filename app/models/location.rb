@@ -3,18 +3,14 @@ class Location < ApplicationRecord
 
   has_many :posts
 
-  def self.looks(search, word)
-    if search == "perfect_match"
-      @locations = Location.where("place_name LIKE ? OR address LIKE ?", word, word)
-    elsif search == "forward_match"
-      @locations = Location.where("place_name LIKE ? OR address LIKE ?", "#{word}%", "#{word}%")
-    elsif search == "backward_match"
-      @locations = Location.where("place_name LIKE ? OR address LIKE ?", "%#{word}", "%#{word}")
-    elsif search == "partial_match"
-      @locations = Location.where("place_name LIKE ? OR address LIKE ?", "%#{word}%", "%#{word}%")
+  # 検索メソッドの追加
+  def self.search_by_place_name_or_address(keyword)
+    if keyword.present?
+      where("place_name LIKE :keyword OR address LIKE :keyword", keyword: "%#{keyword}%")
     else
-      @locations = Location.all
+      all
     end
   end
+
 
 end
