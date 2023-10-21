@@ -11,7 +11,7 @@ Admin.create!(
 )
 
 
-olivia = User.find_or_create_by!(email: "olivia@example.com") do |user|
+ User.find_or_create_by!(email: "olivia@example.com") do |user|
   user.last_name = "Santa"
   user.first_name = "Olivia"
   user.last_name_kana = "サンタ"
@@ -20,7 +20,7 @@ olivia = User.find_or_create_by!(email: "olivia@example.com") do |user|
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")
 end
 
-james = User.find_or_create_by!(email: "james@example.com") do |user|
+ User.find_or_create_by!(email: "james@example.com") do |user|
   user.last_name = "Santa"
   user.first_name = "James"
   user.last_name_kana = "サンタ"
@@ -29,7 +29,7 @@ james = User.find_or_create_by!(email: "james@example.com") do |user|
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")
 end
 
-lucas = User.find_or_create_by!(email: "lucas@example.com") do |user|
+ User.find_or_create_by!(email: "lucas@example.com") do |user|
   user.last_name = "Santa"
   user.first_name = "Lucas"
   user.last_name_kana = "サンタ"

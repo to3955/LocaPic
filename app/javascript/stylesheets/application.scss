@@ -31,6 +31,7 @@ footer {
             bottom: 0; /* 追加 */
             width: 100%; /* 追加 */
             height: 40px;
+            background-image: url("../images/IMG_2817.jpeg");
         }
 
 body {
@@ -73,3 +74,10 @@ left: 10px;
   display: inline-block; /* リンクをインラインで表示 */
 }
 
+.header-img {
+  background-image: url("../images/IMG_2817.jpeg");
+}
+
+.navbar-brand {
+  background-image: url("../images/img_2729_720.jpg");
+}
