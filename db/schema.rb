@@ -77,12 +77,6 @@ ActiveRecord::Schema.define(version: 2023_10_18_111653) do
     t.text "caption", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "latitude"
-    t.string "longitude"
-    t.string "new_location_name"
-    t.text "new_location_description"
-    t.index ["location_id"], name: "index_posts_on_location_id"
-    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -126,6 +120,4 @@ ActiveRecord::Schema.define(version: 2023_10_18_111653) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "posts", "locations"
-  add_foreign_key "posts", "users"
 end
