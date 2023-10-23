@@ -101,7 +101,7 @@
   </nav>
     </header>
 
-      <div class="container">
+      <div>
         <% flash.each do |key, value| %>
           <p class="alert alert-<%= key %>">
             <%= sanitize value, tags: %w(br) %>

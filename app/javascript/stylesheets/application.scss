@@ -84,13 +84,7 @@ left: 10px;
   background-image: url("../images/img_2729_720.jpg");
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 30vh; /* 高さ */
-  }
+
 
   .square-border {
     border: 1px solid #000; /* 枠線を追加したい場合 */
