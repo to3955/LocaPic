@@ -1,30 +1,24 @@
-<div class="container">
-  <div class="row">
-    <div class="text-center">
-      <div class="my-3">
-        <div class="square-border p-3">
-          <p>
-            「LocaPic」のテーマは、ユーザーが新しい場所やアクティビティを探し、
-            短い時間の中で充実した体験を楽しむ手助けをすることを目的としています。
-            出かけた際に時間が余ったり、友達との外出が終わるのを待っている時、
-            近くのおすすめスポットを地図上で提示することで、ユーザーに楽しい選択肢を提供します。
-          </p>
-        </div>
+<div class="container text-center">
+  <div class="my-3 d-flex align-items-center justify-content-center square-border p-3">
+    <p class="centered-text">
+      「LocaPic」のテーマは、ユーザーが新しい場所やアクティビティを探し、
+      短い時間の中で充実した体験を楽しむ手助けをすることを目的としています。
+      出かけた際に時間が余ったり、友達との外出が終わるのを待っている時、
+      近くのおすすめスポットを地図上で提示することで、ユーザーに楽しい選択肢を提供します。
+    </p>
+  </div>
+  <div class="btn-wrapper col-10 mx-auto">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-sm btn-block sign_in" %>
       </div>
-
-      <div class="btn-wrapper col-10 mx-auto">
-        <div class="row">
-          <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
-        </div>
-
-        <div class="row">
-          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
-        </div>
-        <h5 class="mt-5">ゲストログインはこちらから</h5>
-        <div class="col mb-3 mt-3">
-          <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
-        </div>
+      <div class="col-md-6 mb-3">
+        <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
       </div>
+    </div>
+    <h5 class="mt-5">ゲストログインはこちらから</h5>
+    <div class="col mb-3 mt-3">
+      <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-block", method: :post %>
     </div>
   </div>
 </div>

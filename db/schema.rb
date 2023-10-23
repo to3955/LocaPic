@@ -77,6 +77,10 @@ ActiveRecord::Schema.define(version: 2023_10_18_111653) do
     t.text "caption", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "latitude"
+    t.string "longitude"
+    t.string "new_location_name"
+    t.text "new_location_description"
   end
 
   create_table "relationships", force: :cascade do |t|

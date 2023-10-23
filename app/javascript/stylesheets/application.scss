@@ -20,8 +20,6 @@
 
 
 
-
-
 footer {
             text-align: center;
             background-color: rgba(0, 0, 0, 0.5);
@@ -81,3 +79,22 @@ left: 10px;
 .navbar-brand {
   background-image: url("../images/img_2729_720.jpg");
 }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 30vh; /* 高さ */
+  }
+
+  .square-border {
+    border: 1px solid #000; /* 枠線を追加したい場合 */
+    padding: 20px;
+    max-width: 600px; /* 枠の幅を調整 */
+  }
+
+  .centered-text {
+    text-align: center;
+  }
+  
