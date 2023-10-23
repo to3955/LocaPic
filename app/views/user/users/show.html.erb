@@ -3,32 +3,52 @@
     <h3 class="px-4 title">マイページ</h3>
   </div>
   <div class="row">
-    <div class="col-10 mx-auto">
+    <div class="col-12 mx-auto"> <!-- col-10からcol-12に変更 -->
       <div class="row mb-2">
-        <h3 class="col-2">登録情報</h3>
-        <p>
-          <%= link_to "edit", edit_information_path, class: "btn btn-success ml-5 pl-5 pr-5" %>
-        </p>
+        <h3 class="col-8">登録情報</h3>
+        <div class="col-4 text-right">
+          <%= link_to "edit", edit_information_path, class: "btn btn-success" %>
+        </div>
       </div>
-      <table class="table table-bordered">
-        <tr>
-          <th>プロフィール画像</th>
-          <th>ユーザー名</th>
-        </tr>
-        <tr>
-          <td><%= image_tag @user.get_profile_image(50, 50) %></td>
-          <td><%= @user.last_name %><%= @user.first_name %></td>
-          <td>フォロー数: <%= @user.followings.count %></td>
-          <td>フォロワー数: <%= @user.followers.count %></td>
-          <td><%= render "user/relationships/btn", user: @user, options: { class: "follow-link" } %></td>
-        </tr>
-      </table>
+       <table class="table table-bordered" style="width: 120%;">
+          <colgroup>
+            <col style="width: 20%;" /> <!-- プロフィール画像の列の幅 -->
+            <col style="width: 20%;" /> <!-- ユーザー名の列の幅 -->
+            <col style="width: 15%;" /> <!-- フォロー数の列の幅 -->
+            <col style="width: 15%;" /> <!-- フォロワー数の列の幅 -->
+            <col style="width: 15%;" /> <!-- フォローの列の幅 -->
+          </colgroup>
+          <tr>
+            <th>
+              <div>profile image</div>
+            </th>
+            <th>
+              <div>user name</div>
+            </th>
+            <th>
+              <div>follow</div>
+            </th>
+            <th>
+              <div>follower</div>
+            </th>
+            <th></th>
+          </tr>
+
+          <tr>
+            <td><%= image_tag @user.get_profile_image(50, 50) %></td>
+            <td><%= @user.last_name + @user.first_name %></td>
+            <td><%= @user.followings.count %></td>
+            <td><%= @user.followers.count %></td>
+            <td><%= render "user/relationships/btn", user: @user, options: { class: "follow-link" } %></td>
+          </tr>
+        </table>
     </div>
   </div>
-  <div class="text-center">
-    <%= link_to "List of my posts", post_path(current_user), class: "btn btn-primary mt-3" %>
-    <%= link_to "Posts you liked", user_likes_path, class: "btn btn-primary mt-3" %>
-    <%= link_to "Follow list", follows_user_path(@user), class: "btn btn-info mt-3 ml-3" %>
-    <%= link_to "Follower list", followers_user_path(@user), class: "btn btn-info mt-3 ml-3" %>
+  <div class="text-center mt-3">
+    <%= link_to "List of my posts", post_path(current_user), class: "btn btn-primary mr-3" %>
+    <%= link_to "Posts you liked", user_likes_path, class: "btn btn-primary mr-3" %>
+    <%= link_to "Follow list", follows_user_path(@user), class: "btn btn-info mr-3" %>
+    <%= link_to "Follower list", followers_user_path(@user), class: "btn btn-info" %>
   </div>
 </div>
+

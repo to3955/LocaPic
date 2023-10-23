@@ -142,24 +142,24 @@ Post.find_or_create_by!(user_id: 3, location_id: 3) do |post|
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")
 end
 
-Post.find_or_create_by!(user_id: 1, location_id: 1) do |post|
+Post.find_or_create_by!(user_id: 4, location_id: 4) do |post|
   post.caption = "パンケーキはふわふわ系だったよ。"
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post4.jpg"), filename:"sample-post4.jpg")
 end
 
 # 別の投稿
-Post.find_or_create_by!(user_id: 2, location_id: 2) do |post|
+Post.find_or_create_by!(user_id: 5, location_id: 5) do |post|
   post.caption = "和風パスタ！"
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post5.jpg"), filename:"sample-post5.jpg")
 end
 
 # 更に別の投稿
-Post.find_or_create_by!(user_id: 3, location_id: 3) do |post|
+Post.find_or_create_by!(user_id: 6, location_id: 6) do |post|
   post.caption = "お豆腐ティラミス。"
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post6.jpg"), filename:"sample-post6.jpg")
 end
 
-Post.find_or_create_by!(user_id: 2, location_id: 2) do |post|
+Post.find_or_create_by!(user_id: 7, location_id: 7) do |post|
   post.caption = "プリン！"
   post.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post7.jpg"), filename:"sample-post7.jpg")
 end

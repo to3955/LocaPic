@@ -102,13 +102,11 @@
     </header>
 
       <div class="container">
-  		   <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
-          <% flash.each do |key, value| %>
-            <p class="alert alert-<%= key %>">
-              <%= sanitize value, tags: %w(br) %>
-            </p>
-          <% end %>
-         </div>
+        <% flash.each do |key, value| %>
+          <p class="alert alert-<%= key %>">
+            <%= sanitize value, tags: %w(br) %>
+          </p>
+        <% end %>
       </div>
 
     <main>

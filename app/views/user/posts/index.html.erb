@@ -8,11 +8,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   </head>
   <body>
-    <div class="container"> <!-- コンテンツを中央に配置 -->
-      <h1 class="text-center">投稿一覧</h1>
+      <h1 class="text-center mt-4">投稿一覧</h1>
       <div class="post-container">
         <% @posts.each do |post| %>
-         <div class="post card mb-3" style="max-width: 500px;"> <!-- 投稿を枠で囲む -->
+         <div class="post card mb-3" style="max-width: 500px; width: 100%;"> <!-- 投稿を枠で囲む -->
             <div class="card-body">
              <%= image_tag post.image, class: "img-fluid", style: "max-width: 20%;" %> <!-- 画像のレスポンシブ対応 -->
               <h2><%= post.caption %></h2>
@@ -32,6 +31,5 @@
           </div>
         <% end %>
       </div>
-    </div>
   </body>
 </html>
