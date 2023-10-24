@@ -10,16 +10,17 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td>
-          <%= link_to user_path(user) do %>
-            <%= image_tag user.get_profile_image(50, 50) %>
-          <% end %>
-        </td>
-        <td><%= user.full_name %></td>
-      </tr>
-    <% end %>
+     <% @users.each do |user| %>
+    <tr>
+      <td>
+        <%= link_to user_path(user) do %>
+          <%= image_tag user.get_profile_image(50, 50) %>
+        <% end %>
+      </td>
+      <td><%= link_to user.full_name, show_detail_post_path(user) %></td>
+    </tr>
+  <% end %>
+
   </tbody>
 </table>
 
@@ -33,11 +34,12 @@
     </tr>
   </thead>
   <tbody>
-    <% @locations.each do |location| %>
-      <tr>
-        <td><%= location.place_name %></td>
-        <td><%= location.description %></td>
-      </tr>
-    <% end %>
+     <% @locations.each do |location| %>
+    <tr>
+      <td><%= link_to location.place_name, show_detail_post_path(location) %></td>
+      <td><%= location.description %></td>
+    </tr>
+  <% end %>
+
   </tbody>
 </table>
