@@ -41,9 +41,13 @@ class User::PostsController < ApplicationController
   end
 
 
-   def index
-      @post = Post.new
+  def index
+    @post = Post.new
 
+    if params[:show_all_posts] == 'true'
+      # フォローしているユーザーがいなくても全ての投稿を取得
+      @posts = Post.all
+    else
       # フォローしているユーザーのIDを取得
       followings_user_ids = current_user.followings.pluck(:id)
 
@@ -51,21 +55,32 @@ class User::PostsController < ApplicationController
         # フォローしているユーザーの投稿一覧を取得
         @posts = Post.where(user_id: followings_user_ids)
       else
-        # フォローしているユーザーがいない場合は全ての投稿を取得
-        @posts = Post.all
+        # フォローしているユーザーがいない場合は空の配列
+        @posts = []
       end
+    end
 
-      @like_counts = {}
-      @posts.each do |post|
+    # 全ての投稿を取得
+    @all_posts = Post.all
+
+    @like_counts = {}
+    @comment_counts = {}
+
+    @posts.each do |post|
+      @like_counts[post.id] = post.likes.count
+      @comment_counts[post.id] = post.replies.count
+    end
+
+    # もし @posts が空であれば、全ての投稿の情報も設定
+    if @posts.empty?
+      @all_posts.each do |post|
         @like_counts[post.id] = post.likes.count
-      end
-
-      # 各投稿のコメント数（Replyの数）を取得
-      @comment_counts = {}
-      @posts.each do |post|
         @comment_counts[post.id] = post.replies.count
       end
-   end
+    end
+  end
+
+
 
   def show
     @posts = current_user.posts

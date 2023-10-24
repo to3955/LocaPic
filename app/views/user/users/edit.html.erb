@@ -1,38 +1,71 @@
 <div class="container mt-5 mb-5">
   <div class="row mt-2 mb-3 offset-1 text-center">
-    <h3 class="px-4 title-background">会員情報編集</h3>
+    <h3 class="px-4 title-background">Edit profile</h3>
   </div>
 
-   <%= form_with model: @user, url:users_information_path, method: :patch do |f| %>
-  <table>
-    <tr>
-      <td>プロフィール画像</td>
-      <td><%= image_tag @user.profile_image, width: 50, height: 50 if @user.profile_image.attached? %></td>
-    </tr>
+  <%= form_with model: @user, url: users_information_path, method: :patch do |f| %>
     <div class="form-group">
-  <label for="inputImage">Image</label>
-  <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>
-  <label for="inputImage">
-  </div>
+      <label for="inputImage">profile image</label>
+      <!-- 画像をクリックでファイル選択を起動 -->
+      <img id="profile-image-preview" src="<%= @user.profile_image.attached? ? url_for(@user.profile_image) : '' %>" alt="プロフィール画像" width="100" height="100" style="cursor: pointer;">
+      <input type="file" id="profile-image-input" class="form-control" accept="image/*" style="display: none;">
+    </div>
+
     <tr>
-      <td>氏名</td>
-      <td><%= f.text_field :last_name, class: "form-control last_name" %></td>
-      <td><%= f.text_field :first_name, class: "form-control first_name" %></td>
-    </tr>
-    <tr>
-      <td>フリガナ</td>
-      <td><%= f.text_field :last_name_kana, class: "form-control last_name_kana" %></td>
-      <td><%= f.text_field :first_name_kana, class: "form-control first_name_kana" %></td>
-    </tr>
-    <tr>
-      <td>メールアドレス</td>
-      <td><%= f.text_field :email, class: "form-control email" %></td>
-    </tr>
+    <td>氏名</td>
+    <td>
+      <div class="row">
+        <div class="col">
+          <%= f.text_field :last_name, class: 'form-control last_name' %>
+        </div>
+        <div class="col">
+          <%= f.text_field :first_name, class: 'form-control first_name' %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>フリガナ</td>
+    <td>
+      <div class="row">
+        <div class="col">
+          <%= f.text_field :last_name_kana, class: 'form-control last_name_kana' %>
+        </div>
+        <div class="col">
+          <%= f.text_field :first_name_kana, class: 'form-control first_name_kana' %>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>メールアドレス</td>
+    <td><%= f.text_field :email, class: 'form-control email' %></td>
+  </tr>
+
   </table>
   <div class="form-group">
-    <%= f.submit " 編集内容を保存 ", class: "btn btn-success" %>
-    <%= link_to "退会する", users_confirm_path, class: "btn btn-danger ml-5" %>
+    <%= f.submit 'Save edits', class: 'btn btn-success' %>
+    <%= link_to '退会', users_confirm_path, class: 'btn btn-danger ml-5' %>
   </div>
-
   <% end %>
 </div>
+
+<script>
+  // プロフィール画像の選択が変更されたときにプレビューを表示
+  const profileImageInput = document.getElementById('profile-image-input');
+  const profileImagePreview = document.getElementById('profile-image-preview');
+
+  profileImagePreview.addEventListener('click', () => {
+    profileImageInput.click();
+  });
+
+  profileImageInput.addEventListener('change', (e) => {
+    const selectedImage = e.target.files[0];
+    if (selectedImage) {
+      const objectURL = URL.createObjectURL(selectedImage);
+      profileImagePreview.src = objectURL;
+    } else {
+      profileImagePreview.src = '';
+    }
+  });
+</script>

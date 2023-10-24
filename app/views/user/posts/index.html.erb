@@ -1,35 +1,71 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <title>LocaPic</title>
-    <%= stylesheet_link_tag 'application' %>
-    <%= csrf_meta_tags %>
-    <!-- Bootstrap CSS を追加 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  </head>
-  <body>
-      <h1 class="text-center mt-4">投稿一覧</h1>
-      <div class="post-container">
-        <% @posts.each do |post| %>
-         <div class="post card mb-3" style="max-width: 500px; width: 100%;"> <!-- 投稿を枠で囲む -->
-            <div class="card-body">
-             <%= image_tag post.image, class: "img-fluid", style: "max-width: 20%;" %> <!-- 画像のレスポンシブ対応 -->
-              <h2><%= post.caption %></h2>
-              <% if post.location %>
-                <p>場所: <%= post.location.place_name %></p>
-                <p>説明: <%= post.location.description %></p>
-              <% else %>
-                <p>場所情報がありません</p>
-              <% end %>
-              <p>いいねの数: <span id="likes_counts"><%= @like_counts[post.id] %></span></p>
-              <p>コメントの数: <span id="comments_count"><%= @comment_counts[post.id] %></span></p>
-            </div>
-            <div class="card-footer">
-              <%= link_to "詳細を表示", show_detail_post_path(post), class: "btn btn-primary" %>
-              <div id="like_buttons_<%= post.id %>"><%= render 'user/likes/btn', {post: post, current_user: current_user} %></div>
-            </div>
-          </div>
+<head>
+  <title>LocaPic</title>
+  <%= stylesheet_link_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <!-- Bootstrap CSS を追加 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <h1 class="text-center mt-4">投稿一覧</h1>
+  <div class="text-center mt-3">
+    <button id="show-following-posts" class="btn btn-primary mr-3">フォロー中のユーザーの投稿</button>
+　　<button id="show-all-posts" class="btn btn-primary">全ての投稿を表示</button>
+  </div>
+
+  <div id="following-posts" class="post-container">
+    <!-- フォロー中のユーザーの投稿を表示するコンテンツ -->
+    <% @posts.each do |post| %>
+      <div class="card-body">
+        <%= image_tag post.image, class: "img-fluid", style: "max-width: 20%;" %>
+        <h2><%= post.caption %></h2>
+        <% if post.location %>
+          <p>場所: <%= post.location.place_name %></p>
+          <p>説明: <%= post.location.description %></p>
+        <% else %>
+          <p>場所情報がありません</p>
         <% end %>
+        <p>いいねの数: <span id="likes_counts"><%= @like_counts[post.id] %></span></p>
+        <p>コメントの数: <span id="comments_count"><%= @comment_counts[post.id] %></span></p>
       </div>
-  </body>
+
+    <% end %>
+  </div>
+
+  <div id="all-posts" class="post-container" style="display: none;">
+    <!-- 全ての投稿を表示するコンテンツ -->
+
+    <% @all_posts.each do |post| %>
+      <div class="card-body">
+        <%= image_tag post.image, class: "img-fluid", style: "max-width: 20%;" %>
+        <h2><%= post.caption %></h2>
+        <% if post.location %>
+          <p>場所: <%= post.location.place_name %></p>
+          <p>説明: <%= post.location.description %></p>
+        <% else %>
+          <p>場所情報がありません</p>
+        <% end %>
+        <p>いいねの数: <span id="likes_counts"><%= @like_counts[post.id] %></span></p>
+        <p>コメントの数: <span id="comments_count"><%= @comment_counts[post.id] %></span></p>
+      </div>
+
+    <% end %>
+  </div>
+
+  <script>
+    document.getElementById('show-following-posts').addEventListener('click', function() {
+    console.log('ボタンがクリックされました');
+    document.getElementById('following-posts').style.display = 'block';
+    document.getElementById('all-posts').style.display = 'none';
+  });
+
+  document.getElementById('show-all-posts').addEventListener('click', function() {
+    console.log('ボタンがクリックされました');
+    document.getElementById('following-posts').style.display = 'none';
+    document.getElementById('all-posts').style.display = 'block';
+  });
+
+  </script>
+</body>
 </html>
