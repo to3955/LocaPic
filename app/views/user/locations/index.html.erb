@@ -1,56 +1,65 @@
-
 <h2>gmap</h2>
 
 <input id="address" type="textbox" value="GeekSalon">
 <input type="button" value="検索" onclick="codeAddress()">
-<!-- 下の1行を追加 -->
-<div id="display">、、、、</div>
 
-<div id='map'></div>
+<div id="container"> <!-- 新しいコンテナを追加 -->
+  <div id="display"></div>
+  <div id='map'></div>
+</div>
 
 <style>
-#map {
-  height: 600px;
-  width: 600px;
-}
+  /* コンテナを中央に配置するためのスタイル */
+  #container {
+    display: flex;
+    flex-direction: column; /* 子要素を縦に配置 */
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    width: 600px;
+  }
+
+  /* マップのスタイル */
+  #map {
+    height: 100%;
+    width: 100%;
+  }
 </style>
 
 <script>
-let map
-let geocoder
-// 下の1行を追加
-const display = document.getElementById('display')
+  let map
+  let geocoder
+  const display = document.getElementById('display')
 
-function initMap(){
-  geocoder = new google.maps.Geocoder()
+  function initMap(){
+    geocoder = new google.maps.Geocoder()
 
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 40.7828, lng:-73.9653},
-    zoom: 12,
-  });
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 40.7828, lng:-73.9653},
+      zoom: 12,
+    });
 
-  marker = new google.maps.Marker({
-    position:  {lat: 40.7828, lng:-73.9653},
-    map: map
-  });
-}
+    marker = new google.maps.Marker({
+      position:  {lat: 40.7828, lng:-73.9653},
+      map: map
+    });
+  }
 
-function codeAddress(){
-  let inputAddress = document.getElementById('address').value;
+  function codeAddress(){
+    let inputAddress = document.getElementById('address').value;
 
-  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
-    if (status == 'OK') {
-      map.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-      });
-      // 下の1行を追加
-      display.textContent = "検索結果：" + results[ 0 ].geometry.location
-    } else {
-      alert('該当する結果がありませんでした：' + status);
-    }
-  });
-}
+    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+        display.textContent = "検索結果：" + results[ 0 ].geometry.location
+      } else {
+        alert('該当する結果がありませんでした：' + status);
+      }
+    });
+  }
 </script>
-<script src=<%= ENV['API_KEY'] %> async defer></script>
+<script src="<%= ENV['API_KEY'] %>" async defer></script> <!-- スクリプトのsrc属性を修正 -->

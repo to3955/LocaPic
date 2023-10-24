@@ -34,22 +34,28 @@ function initMap(){
   });
 }
 
-function codeAddress(){
+function codeAddress() {
   let inputAddress = document.getElementById('address').value;
 
-  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+  geocoder.geocode({ 'address': inputAddress }, function (results, status) {
     if (status == 'OK') {
       map.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
+        map: map,
+        position: results[0].geometry.location
       });
-      // 下の1行を追加
-      display.textContent = "検索結果：" + results[ 0 ].geometry.location
+
+      // フォーム内の緯度と経度のフィールドを更新
+      document.getElementById('latitude').value = results[0].geometry.location.lat();
+      document.getElementById('longitude').value = results[0].geometry.location.lng();
+
+      // 緯度と経度を表示にも表示する
+      display.textContent = "検索結果：" + results[0].geometry.location;
     } else {
       alert('該当する結果がありませんでした：' + status);
     }
   });
 }
+
 </script>
 <script src=<%= ENV['API_KEY'] %> async defer></script>
