@@ -26,8 +26,8 @@
         <% else %>
           <p>場所情報がありません</p>
         <% end %>
-        <p>いいねの数: <span id="likes_counts"><%= @like_counts[post.id] %></span></p>
-        <p>コメントの数: <span id="comments_count"><%= @comment_counts[post.id] %></span></p>
+        <p>いいねの数: <span class="like-count"><%= @like_counts[post.id] %></span></p>
+        <p>コメントの数: <span class="comment-count"><%= @comment_counts[post.id] %></span></p>
         <%= link_to "詳細を表示", show_detail_post_path(post), class: "btn btn-primary" %>
       </div>
 
@@ -47,8 +47,8 @@
         <% else %>
           <p>場所情報がありません</p>
         <% end %>
-        <p>いいねの数: <span id="likes_counts"><%= @like_counts[post.id] %></span></p>
-        <p>コメントの数: <span id="comments_count"><%= @comment_counts[post.id] %></span></p>
+        <p>いいねの数: <span class="like-count"><%= @like_counts[post.id] %></span></p>
+        <p>コメントの数: <span class="comment-count"><%= @comment_counts[post.id] %></span></p>
         <%= link_to "詳細を表示", show_detail_post_path(post), class: "btn btn-primary" %>
       </div>
 
@@ -56,18 +56,26 @@
   </div>
 
   <script>
-    document.getElementById('show-following-posts').addEventListener('click', function() {
-    console.log('ボタンがクリックされました');
+  document.getElementById('show-following-posts').addEventListener('click', function() {
     document.getElementById('following-posts').style.display = 'block';
     document.getElementById('all-posts').style.display = 'none';
   });
 
   document.getElementById('show-all-posts').addEventListener('click', function() {
-    console.log('ボタンがクリックされました');
     document.getElementById('following-posts').style.display = 'none';
     document.getElementById('all-posts').style.display = 'block';
   });
+</script>
+<script>
+    // いいねの数を取得
+    var likeCounts = document.querySelectorAll('.like-count');
 
+    // 各いいねの数を処理
+    likeCounts.forEach(function(likeCount) {
+      // ここで各いいねの数にアクセスできる
+      console.log(likeCount.textContent);
+    });
   </script>
+
 </body>
 </html>

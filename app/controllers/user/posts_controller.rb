@@ -71,15 +71,12 @@ class User::PostsController < ApplicationController
       @comment_counts[post.id] = post.replies.count
     end
 
-    # もし @posts が空であれば、全ての投稿の情報も設定
-    if @posts.empty?
-      @all_posts.each do |post|
-        @like_counts[post.id] = post.likes.count
-        @comment_counts[post.id] = post.replies.count
-      end
+    # 全ての投稿に関連するいいねとコメント数も取得
+    @all_posts.each do |post|
+      @like_counts[post.id] = post.likes.count
+      @comment_counts[post.id] = post.replies.count
     end
   end
-
 
 
   def show
