@@ -95,3 +95,9 @@ left: 10px;
   .centered-text {
     text-align: center;
   }
+
+.card-text-fixed-height {
+  max-height: 100px; /* 適切な高さに調整 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

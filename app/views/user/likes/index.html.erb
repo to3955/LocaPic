@@ -1,14 +1,14 @@
 <div class="container py-5 mx-auto">
-  <h3 class="text-center">いいねした投稿一覧</h3>
+  <h3 class="text-center">Posts you liked</h3>
   <div class="row">
     <div class="col-12">
       <% if @liked_posts.any? %>
         <table class="table table-bordered">
           <thead class="bg-primary text-white">
             <tr>
-              <th>投稿画像</th>
-              <th>キャプション</th>
-              <th>場所</th>
+              <th>post_image</th>
+              <th>caption</th>
+              <th>post_location</th>
             </tr>
           </thead>
           <tbody>
@@ -16,7 +16,7 @@
               <tr>
                 <td>
                   <%= link_to show_detail_post_path(post) do %>
-                    <%= image_tag post.image, class: "img-thumbnail custom-image" %>
+                    <%= image_tag post.image, class: "img-thumbnail custom-image", style: "max-width: 200px; max-height: 200px;" %>
                   <% end %>
                 </td>
                 <td><%= post.caption %></td>

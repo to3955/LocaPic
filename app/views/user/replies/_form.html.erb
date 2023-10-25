@@ -1,6 +1,6 @@
 <div>
   <%= form_with model: [post, Reply.new], url: post_replies_path(post, @reply), local: false do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", style: "width: 200px;" %>
     <%= f.submit "送信する" %>
   <% end %>
 </div>

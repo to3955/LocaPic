@@ -1,31 +1,48 @@
- <html>
-   <!DOCTYPE html>
-   <head>
-   <link rel="stylesheet" type="text/css" href="styles.css">
+ <!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+      .card-img-container {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .card-img-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    </style>
   </head>
-   <body>
+  <body>
     <div class="row">
       <% @posts.each do |post| %>
         <div class="col-md-2 mb-3">
           <div class="card post-card">
             <%= link_to show_detail_post_path(post) do %>
-              <% if post.image.present? %>
-                <%= image_tag post.image, class: "card-img-top", alt: "投稿画像" %>
-              <% else %>
-                 <%= image_tag (post.image.present? ? post.image : 'no_image.jpg'), class: "card-img-top", alt: "投稿画像" %>
-              <% end %>
-            <% end %>
-              <!-- いいねの数を表示 -->
-              <p>いいねの数: <span id="likes_count"><%= @like_counts[post.id] %></span></p>
-
-              <!-- コメント数を表示 -->
-              <p>コメントの数: <span id="comments_count"><%= @comment_counts[post.id] %></span></p>
-
-              <div class="text-center">
-                <button class="btn btn-primary view-more" data-target="#post<%= post.id %>">詳細を表示</button>
+              <div class="card-img-container">
+                <% if post.image.present? %>
+                  <%= image_tag post.image, alt: "投稿画像", width: "200", height: "200" %>
+                <% else %>
+                  <%= image_tag 'no_image.jpg', alt: "投稿画像" %>
+                <% end %>
               </div>
-              <!-- 場所情報の表示 -->
-              <div class="card-body post-detail" id="post<%= post.id %>" style="display: none;">
+            <% end %>
+
+            <!-- いいねの数を表示 -->
+            <p>いいねの数: <span id="likes_count"><%= @like_counts[post.id] %></span></p>
+
+            <!-- コメント数を表示 -->
+            <p>コメントの数: <span id="comments_count"><%= @comment_counts[post.id] %></span></p>
+
+            <div class="text-center">
+              <!-- 折りたたみ/展開用のボタン -->
+              <button class="btn btn-primary view-more" data-target="#post<%= post.id %>">詳細を表示</button>
+            </div>
+
+            <!-- 場所情報の表示 -->
+            <div class="card-body post-detail" id="post<%= post.id %>" style="display: none;">
               <h2 class="card-title"><%= post.caption %></h2>
               <% if post.location %>
                 <p class="card-text">場所: <%= post.location.place_name %></p>
@@ -49,14 +66,15 @@
         </div>
       <% end %>
     </div>
-    <script>
-  $(document).ready(function() {
-    $('.view-more').click(function() {
-      var target = $($(this).data('target'));
-      target.toggle(); // 詳細部分の表示/非表示を切り替え
-    });
-  });
-</script>
 
+    <!-- JavaScriptを使用して詳細部分を切り替え -->
+    <script>
+      $(document).ready(function () {
+        $('.view-more').click(function () {
+          var target = $($(this).data('target'));
+          target.slideToggle(); // 詳細部分の表示/非表示を切り替え
+        });
+      });
+    </script>
   </body>
 </html>
