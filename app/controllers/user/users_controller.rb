@@ -69,7 +69,7 @@ class User::UsersController < ApplicationController
   end
 
   def user_params
-  params.require(:user).permit(:last_name, :first_name, :email, :is_deleted)  # 必要な属性を適切に設定
+  params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :is_deleted)  # 必要な属性を適切に設定
   end
 
   def check_guest
