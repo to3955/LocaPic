@@ -36,12 +36,20 @@ class User::UsersController < ApplicationController
 
   def update
     @user = current_user
+
+    if params[:user][:profile_image].present?
+      # 新しいプロフィール画像が送信された場合
+      @user.profile_image.purge  # 既存の画像を削除（任意）
+      @user.profile_image.attach(params[:user][:profile_image])  # 新しい画像をアタッチ
+    end
+
     if @user.update(user_params)
       redirect_to users_mypage_path
     else
       render "edit"
     end
   end
+
 
   def confirm
   end
