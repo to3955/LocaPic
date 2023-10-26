@@ -58,7 +58,6 @@ gem 'devise'
 gem 'gmaps4rails'
 gem 'geocoder'
 gem 'jquery-rails'
-gem 'dotenv-rails'
 gem 'dotenv'
 gem 'dotenv-rails'
 group :production do
