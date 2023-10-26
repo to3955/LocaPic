@@ -15,7 +15,7 @@ end
   user.first_name = "Olivia"
   user.last_name_kana = "サンタ"
   user.first_name_kana = "オリビア"
-  user.password = "Olivia123"
+  user.encrypted_password = "Olivia123"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")
 end
 
@@ -24,7 +24,7 @@ end
   user.first_name = "James"
   user.last_name_kana = "サンタ"
   user.first_name_kana = "ジェームズ"
-  user.password = "James123"
+  user.encrypted_password = "James123"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user2.jpg"), filename:"sample-user2.jpg")
 end
 
@@ -33,7 +33,7 @@ User.find_or_create_by!(email: "lucas@example.com") do |user|
   user.first_name = "Lucas"
   user.last_name_kana = "サンタ"
   user.first_name_kana = "ルーカス"
-  user.password = "Lucas123"
+  user.encrypted_password = "Lucas123"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user3.jpg"), filename:"sample-user3.jpg")
 end
 
@@ -42,7 +42,7 @@ end
   user.first_name = "太郎"
   user.last_name_kana = "ハヤシ"
   user.first_name_kana = "タロウ"
-  user.password = "tarou123"
+  user.encrypted_password = "tarou123"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user4.jpg"), filename:"sample-user4.jpg")
 end
 
@@ -51,7 +51,7 @@ end
   user.first_name = "二郎"
   user.last_name_kana = "こばやし"
   user.first_name_kana = "ジロウ"
-  user.password = "Zirou123"
+  user.encrypted_password = "Zirou123"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user5.jpg"), filename:"sample-user5.jpg")
 end
 
@@ -60,7 +60,7 @@ end
   user.first_name = "三郎"
   user.last_name_kana = "オオバヤシ"
   user.first_name_kana = "サブロウ"
-  user.password = "Saburou123"
+  user.encrypted_password = "Saburou123"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user6.jpg"), filename:"sample-user6.jpg")
 end
 
@@ -69,7 +69,7 @@ end
   user.first_name = "花子"
   user.last_name_kana = "モリ"
   user.first_name_kana = "ハナコ"
-  user.password = "Hanako123"
+  user.encrypted_password = "Hanako123"
   user.profile_image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user7.jpg"), filename:"sample-user7.jpg")
 end
 
