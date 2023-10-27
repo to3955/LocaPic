@@ -101,3 +101,10 @@ left: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@media (max-width: 768px) {
+  /* スマートフォン向けのスタイル設定 */
+  .navbar {
+    /* スタイルの変更 */
+  }
+}
