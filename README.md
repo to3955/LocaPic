@@ -35,7 +35,7 @@
 <!--テーマを設定・提出する時点では不要です-->
 ​
 ## 開発環境
-- OS：Linux(CentOS)
+- MACOS：13.3（22E252)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
