@@ -23,7 +23,7 @@
             <%= link_to show_detail_post_path(post) do %>
               <div class="card-img-container">
                 <% if post.image.present? %>
-                  <%= image_tag post.get_image(200, 200), alt: "投稿画像" %>
+                  <%= image_tag post.get_image(200, 200), alt: "投稿画像", width: "200", height: "200" %>
                 <% else %>
                   <%= image_tag 'no_image.jpg', alt: "投稿画像" %>
                 <% end %>
