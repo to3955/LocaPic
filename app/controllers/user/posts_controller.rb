@@ -11,7 +11,7 @@ class User::PostsController < ApplicationController
   def create
     if params[:post].present? && (params[:post][:new_location_name].blank? && params[:post][:location_id].blank?)
       flash[:alert] = '新しい場所を入力するか、既存の場所を選択してください.'
-      redirect_to new_user_post_path
+      redirect_to new_post_path
     else
       # フォームデータから新しいロケーションを作成または既存のロケーションを取得
       if params[:post][:new_location_name].present?
