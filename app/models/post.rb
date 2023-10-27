@@ -6,6 +6,12 @@ class Post < ApplicationRecord
   has_many :replies, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+
+  validates :image, presence: true
+  validates :caption, presence: true
+  validates :latitude, presence: true
+  validates :longitude, presence: true
+
   # モデル内で定義されるメソッド
   def get_image(width, height)
     unless image.attached?

@@ -5,7 +5,7 @@
         <div class="card-body">
           <%= form_with(model: @post, local: true) do |form| %>
 
-            <div class="form-group">
+             <div class="form-group">
               <%= form.label :image, '写真のアップロード' %>
               <%= form.file_field :image, class: "form-control" %>
             </div>
@@ -44,9 +44,23 @@
       <!--      <#%= form.text_field :place_name, class: "form-control" %>-->
       <!--    </div>-->
 
+            <% if @post.errors.any? %>
+              <div id="error_explanation">
+                <div class="alert alert-danger">
+                  The form contains <%= pluralize(@post.errors.count, "error") %>.
+                </div>
+                <ul>
+                  <% @post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
             <div class="actions text-center">
               <%= form.submit "投稿", class: "btn btn-primary" %>
             </div>
+
           <% end %>
         </div>
       </div>

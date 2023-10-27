@@ -10,35 +10,48 @@ class User::PostsController < ApplicationController
 
   def create
     if params[:post].present? && (params[:post][:new_location_name].blank? && params[:post][:location_id].blank?)
-      flash[:alert] = '新しい場所を入力するか、既存の場所を選択してください。'
+      flash[:alert] = '新しい場所を入力するか、既存の場所を選択してください.'
       redirect_to new_user_post_path
     else
-
+      # フォームデータから新しいロケーションを作成または既存のロケーションを取得
       if params[:post][:new_location_name].present?
-        @location =  Location.new(
+        @location = Location.new(
           place_name: params[:post][:new_location_name],
           description: params[:post][:new_location_description],
-          latitude:  params[:post][:latitude],
+          latitude: params[:post][:latitude],
           longitude: params[:post][:longitude]
         )
+        if @location.save
+          # ロケーションが正常に保存された場合の処理
+        else
+          # ロケーションの保存に失敗した場合の処理
+          render :new
+          return
+        end
       else
-        Location.find_by(id: params[:post][:location_id])
+        @location = Location.find_by(id: params[:post][:location_id])
       end
-      if @location && @location.save
+
+      # ロケーションが正常に取得または作成された場合、ポストを作成
+      if @location
         @post = Post.new(post_params)
-        @post.location_id = @location.id
-        @post.user_id = current_user.id
+        @post.location = @location
+        @post.user = current_user
 
         if @post.save
+          # ポストの保存に成功した場合の処理
           redirect_to show_detail_post_path(@post), notice: '投稿が作成されました'
         else
+          # ポストの保存に失敗した場合の処理
           render :new
         end
       else
+        # ロケーションが取得または作成できなかった場合の処理
         render :new
       end
     end
   end
+
 
 
   def index
