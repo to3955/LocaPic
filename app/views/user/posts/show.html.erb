@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+
     <style>
       /* コンテナ全体に上部マージンを追加 */
       .container {
         margin-top: 20px; /* 適切な値を設定してください */
       }
     </style>
-  </head>
-  <body>
-    <div class="container">
+   <div class="container">
       <div class="row">
         <% @posts.each do |post| %>
-          <div class="col-md-4 mb-3">
-           <div class="card post-card">
+          <div class="col-md-3 mb-3">
+            <div class="card post-card">
               <%= link_to show_detail_post_path(post) do %>
                 <div class="card-img-container" style="height: 200px; overflow: hidden;">
                   <% if post.image.present? %>
@@ -24,13 +19,13 @@
                   <% end %>
                 </div>
               <% end %>
-               <div class="ml-3 mt-3">
-              <!-- いいねの数を表示 -->
-              <p>いいねの数: <span id="likes_count<%= post.id %>"><%= @like_counts[post.id] %></span></p>
+              <div class="ml-3 mt-3">
+                <!-- いいねの数を表示 -->
+                <p>いいねの数: <span id="likes_count<%= post.id %>"><%= @like_counts[post.id] %></span></p>
 
-              <!-- コメント数を表示 -->
-              <p>コメントの数: <span id="comments_count<%= post.id %>"><%= @comment_counts[post.id] %></span></p>
-               </div>
+                <!-- コメント数を表示 -->
+                <p>コメントの数: <span id="comments_count<%= post.id %>"><%= @comment_counts[post.id] %></span></p>
+              </div>
               <div class="text-center">
                 <!-- 折りたたみ/展開用のボタン -->
                 <button class="btn btn-primary view-more mb-4" data-target="#post<%= post.id %>">詳細を表示</button>
@@ -38,7 +33,7 @@
 
               <!-- 場所情報の表示 -->
               <div class="card-body post-detail" id="post<%= post.id %>" style="display: none;">
-                <h2 class="card-title"><%= post.caption %></h2>
+                <h5 class="card-title"><%= post.caption %></h5>
                 <% if post.location %>
                   <p class="card-text">場所: <%= post.location.place_name %></p>
                   <p class="card-text">説明: <%= post.location.description %></p>
@@ -72,5 +67,3 @@
         });
       });
     </script>
-  </body>
-</html>
