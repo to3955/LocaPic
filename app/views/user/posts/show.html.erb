@@ -14,26 +14,26 @@
       <div class="row">
         <% @posts.each do |post| %>
           <div class="col-md-4 mb-3">
-            <div class="card post-card">
+           <div class="card post-card">
               <%= link_to show_detail_post_path(post) do %>
-                <div class="card-img-container">
+                <div class="card-img-container" style="height: 200px; overflow: hidden;">
                   <% if post.image.present? %>
-                    <%= image_tag post.get_image(200, 200), alt: "投稿画像", class: "img-fluid" %>
+                    <%= image_tag post.get_image(200, 200), alt: "投稿画像", class: "img-fluid w-100 h-100" %>
                   <% else %>
-                    <%= image_tag 'no_image.jpg', alt: "投稿画像", class: "img-fluid" %>
+                    <%= image_tag 'no_image.jpg', alt: "投稿画像", class: "img-fluid w-100 h-100" %>
                   <% end %>
                 </div>
               <% end %>
-
+               <div class="ml-3 mt-3">
               <!-- いいねの数を表示 -->
               <p>いいねの数: <span id="likes_count<%= post.id %>"><%= @like_counts[post.id] %></span></p>
 
               <!-- コメント数を表示 -->
               <p>コメントの数: <span id="comments_count<%= post.id %>"><%= @comment_counts[post.id] %></span></p>
-
+               </div>
               <div class="text-center">
                 <!-- 折りたたみ/展開用のボタン -->
-                <button class="btn btn-primary view-more" data-target="#post<%= post.id %>">詳細を表示</button>
+                <button class="btn btn-primary view-more mb-4" data-target="#post<%= post.id %>">詳細を表示</button>
               </div>
 
               <!-- 場所情報の表示 -->
