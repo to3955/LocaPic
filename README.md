@@ -37,14 +37,14 @@
 - 画面遷移図(https://app.diagrams.net/?libs=general;uml#G1FtEL180j6Pm1_soLp2TfehtxP7MqNGk1)
 - テーブル定義書・詳細設計(https://docs.google.com/spreadsheets/d/1E-BJgPkWE6rowqSGlqFDHJxouYHLTLHx3OI4nrxk6OU/edit#gid=0)
 ## 開発環境
-- MACOS：13.3（22E252)
+- OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
 ​
-<!--## 使用素材-->
+## 使用素材
 <!--- 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。-->
 <!--- アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。-->
 <!--- 使用しない場合は、使用素材の項目をREADMEから削除してください。-->
-<!--折りたたむ-->
+折りたたむ
