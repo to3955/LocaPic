@@ -33,8 +33,9 @@
 ​
 ## 設計書
 <!--テーマを設定・提出する時点では不要です-->
-- 
-​
+- ER図(https://app.diagrams.net/?client=1#G1Sd9OPCUt3ciU1y8D_2kCuFFYQiQlru--#%7B%22pageId%22%3A%223Q2J95yUPXd6JoPigk3C%22%7D)
+- 画面遷移図(https://app.diagrams.net/?libs=general;uml#G1FtEL180j6Pm1_soLp2TfehtxP7MqNGk1)
+- テーブル定義書・詳細設計(https://docs.google.com/spreadsheets/d/1E-BJgPkWE6rowqSGlqFDHJxouYHLTLHx3OI4nrxk6OU/edit#gid=0)
 ## 開発環境
 - MACOS：13.3（22E252)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
