@@ -7,14 +7,14 @@ class User::RelationshipsController < ApplicationController
     user = User.find(params[:user_id])
     current_user.follow(user)
     @user = user
-    #redirect_to request.referer
+    respond_to :js
   end
 
   def destroy
     user = User.find(params[:user_id])
     current_user.unfollow(user)
     @user = user
-    #redirect_to  request.referer
+    respond_to :js
   end
 
   def followings

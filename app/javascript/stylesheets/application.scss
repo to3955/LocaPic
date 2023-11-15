@@ -105,6 +105,7 @@ left: 10px;
 @media (max-width: 767px) {
   .navbar-nav {
     flex-direction: row; /* リスト項目を横に配置 */
+    display: inline;
   }
 
   .nav-item {

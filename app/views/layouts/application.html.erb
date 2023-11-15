@@ -13,8 +13,8 @@
   </head>
 
     <body>
-    <header class="header-img shadow-sm" style="height: 60px; background-size: cover;">
-  　　<nav class="navbar navbar-expand-md navbar-light">
+    <header class="header-img shadow-sm" style="background-size: cover;">
+  　　<nav class="navbar navbar-expand-md navbar-light" style="padding: 0px; 1rem;">
   　 　 <a class="navbar-brand" href="/" style="background-size: cover; width: 120px; height: 40px;">
        </a>
 
@@ -26,7 +26,6 @@
             <ul class="navbar-nav ml-auto">
 
               <% if admin_signed_in? %>
-            <div class="row">
               <li class="ml-auto nav-item">
                 <%= link_to admin_users_path do %>
                   <i class="fas fa-users">Member list</i>
@@ -43,10 +42,8 @@
                 <% end %>
               </li>
 
-            </div>
 
             <% elsif user_signed_in? %>
-            <div class="row">
               <li class="ml-auto nav-item">
                 <%= link_to users_mypage_path do %>
                   <i class="fa-solid fa-image-portrait">My page</i>
@@ -75,8 +72,7 @@
 
               <%= render 'user/searches/search' %>
 
-　　　　 　 </div>
-
+　
           <% else %>
             <li class="nav-item">
               <%= link_to about_path do %>
