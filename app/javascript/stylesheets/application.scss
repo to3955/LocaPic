@@ -102,21 +102,13 @@ left: 10px;
   text-overflow: ellipsis;
 }
 
-@media (max-width: 768px) {
-  /* 768px未満の画面幅に対するスタイル */
-  .navbar-toggler {
-    display: block; /* メニューアイコンを表示 */
+@media (max-width: 767px) {
+  .navbar-nav {
+    flex-direction: row; /* リスト項目を横に配置 */
   }
 
-  .navbar-collapse {
-    display: none; /* メニューを初めは非表示 */
-  }
-
-  .navbar-expand-md .navbar-nav {
-    flex-direction: column; /* メニューアイテムを垂直方向に配置 */
-  }
-
-  .navbar-expand-md .navbar-nav .nav-item {
-    margin-bottom: 10px; /* メニューアイテム間のスペースを追加 */
+  .nav-item {
+    margin-right: 10px; /* リスト項目間の余白を追加 */
   }
 }
+

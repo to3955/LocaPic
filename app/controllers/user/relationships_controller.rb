@@ -1,18 +1,20 @@
 class User::RelationshipsController < ApplicationController
  before_action :authenticate_user!
- before_action :check_guest, only: [:create, :like, :comment]
+ before_action :check_guest, only: [:create, :destroy]
 
 
   def create
     user = User.find(params[:user_id])
     current_user.follow(user)
-    redirect_to request.referer
+    @user = user
+    #redirect_to request.referer
   end
 
   def destroy
     user = User.find(params[:user_id])
     current_user.unfollow(user)
-    redirect_to  request.referer
+    @user = user
+    #redirect_to  request.referer
   end
 
   def followings

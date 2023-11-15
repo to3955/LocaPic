@@ -39,7 +39,10 @@
             <td><%= @user.last_name + @user.first_name %></td>
             <td><%= @user.followings.count %></td>
             <td><%= @user.followers.count %></td>
-            <td><%= render "user/relationships/btn", user: @user, options: { class: "follow-link" } %></td>
+            <td>
+              <%= render "user/relationships/btn", user: @user, options: { class: "follow-link" } %>
+            </td>
+
           </tr>
         </table>
     </div>
