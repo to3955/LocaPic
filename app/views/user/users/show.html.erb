@@ -40,7 +40,9 @@
             <td><%= @user.followings.count %></td>
             <td><%= @user.followers.count %></td>
             <td id="follow-button<%= @user.id %>">
+               <% if current_user != @user %> <!-- 追加の条件: ログインユーザーが自分自身ではない場合にボタンを表示 -->
               <%= render "user/relationships/btn", user: @user, options: { class: "follow-link" } %>
+               <% end %>
             </td>
 
           </tr>
