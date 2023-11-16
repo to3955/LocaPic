@@ -57,11 +57,17 @@ end
 
   def self.search_by_name(keyword)
     if keyword.present?
-      where("last_name LIKE :keyword OR first_name LIKE :keyword OR (last_name || ' ' || first_name) LIKE :keyword", keyword: "%#{keyword}%")
+      if keyword.include?(" ")
+        names = keyword.split
+        where("(last_name LIKE :last_name AND first_name LIKE :first_name) OR (last_name || ' ' || first_name) LIKE :full_name", last_name: "%#{names[0]}%", first_name: "%#{names[1]}%", full_name: "%#{keyword}%")
+      else
+        where("last_name LIKE :keyword OR first_name LIKE :keyword OR (last_name || ' ' || first_name) LIKE :keyword", keyword: "%#{keyword}%")
+      end
     else
       all
     end
   end
+
 
   def guest?
   # 通常のユーザーかどうかを判別する条件を記述
