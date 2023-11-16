@@ -118,6 +118,10 @@ class User::PostsController < ApplicationController
     @comment_counts[@post.id] = @post.replies.count
      # 特定の投稿に関連するコメントを取得
      @replies = @post.replies
+
+     # 地図表示のために緯度と経度をビューに渡す
+    @latitude = @post.location&.latitude
+    @longitude = @post.location&.longitude
   end
 
 
