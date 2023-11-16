@@ -1,2 +1,3 @@
 $('#follow-button<%= @user.id %>').html('<%= j(render("user/relationships/btn", user: @user, options: { class: "follow-link" })) %>');
 $("#unfollow-button<%= @user.id %>").show();
+$("#follower-count").html("<%= @user.followers.count %>");

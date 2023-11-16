@@ -1,6 +1,6 @@
 <div class="container ">
   <div class="row mt-2 mb-3 offset-1 text-center">
-    <h3 class="px-4 title">マイページ</h3>
+    <h3 class="px-4 title">My page</h3>
   </div>
   <div class="row">
     <div class="col-12 mx-auto"> <!-- col-10からcol-12に変更 -->
@@ -38,7 +38,7 @@
             <td><%= image_tag @user.get_profile_image(50, 50) %></td>
             <td><%= @user.last_name + @user.first_name %></td>
             <td><%= @user.followings.count %></td>
-            <td><%= @user.followers.count %></td>
+            <td id=follower-count><%= @user.followers.count %></td>
             <td id="follow-button<%= @user.id %>">
                <% if current_user != @user %> <!-- 追加の条件: ログインユーザーが自分自身ではない場合にボタンを表示 -->
               <%= render "user/relationships/btn", user: @user, options: { class: "follow-link" } %>
