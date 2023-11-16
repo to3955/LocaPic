@@ -113,3 +113,15 @@ left: 10px;
   }
 }
 
+@media (max-width: 800px) {
+  .navbar-nav {
+    /* 追加のスタイルを指定 */
+    /* 例: 最大横幅を800pxに制限し、中央配置にする */
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .nav-item {
+    margin-right: 0px;
+  }
+}
