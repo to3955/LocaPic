@@ -1,69 +1,73 @@
+<style>
+  /* コンテナ全体に上部マージンを追加 */
+  .container {
+    margin-top: 20px; /* 適切な値を設定してください */
+  }
+</style>
 
-    <style>
-      /* コンテナ全体に上部マージンを追加 */
-      .container {
-        margin-top: 20px; /* 適切な値を設定してください */
-      }
-    </style>
-   <div class="container">
-      <div class="row">
-        <% @posts.each do |post| %>
-          <div class="col-md-3 mb-3">
-            <div class="card post-card">
-              <%= link_to show_detail_post_path(post) do %>
-                <div class="card-img-container" style="height: 200px; overflow: hidden;">
-                  <% if post.image.present? %>
-                    <%= image_tag post.get_image(200, 200), alt: "投稿画像", class: "img-fluid w-100 h-100" %>
-                  <% else %>
-                    <%= image_tag 'no_image.jpg', alt: "投稿画像", class: "img-fluid w-100 h-100" %>
-                  <% end %>
-                </div>
-              <% end %>
-              <div class="ml-3 mt-3">
-                <!-- いいねの数を表示 -->
-                <p>いいねの数: <span id="likes_count<%= post.id %>"><%= @like_counts[post.id] %></span></p>
-
-                <!-- コメント数を表示 -->
-                <p>コメントの数: <span id="comments_count<%= post.id %>"><%= @comment_counts[post.id] %></span></p>
-              </div>
-              <div class="text-center">
-                <!-- 折りたたみ/展開用のボタン -->
-                <button class="btn btn-primary view-more mb-4" data-target="#post<%= post.id %>">詳細を表示</button>
-              </div>
-
-              <!-- 場所情報の表示 -->
-              <div class="card-body post-detail" id="post<%= post.id %>" style="display: none;">
-                <h5 class="card-title"><%= post.caption %></h5>
-                <% if post.location %>
-                  <p class="card-text">場所: <%= post.location.place_name %></p>
-                  <p class="card-text">説明: <%= post.location.description %></p>
+<div class="container">
+  <% if @posts.any? %>
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="col-md-3 mb-3">
+          <div class="card post-card">
+            <%= link_to show_detail_post_path(post) do %>
+              <div class="card-img-container" style="height: 200px; overflow: hidden;">
+                <% if post.image.present? %>
+                  <%= image_tag post.get_image(200, 200), alt: "投稿画像", class: "img-fluid w-100 h-100" %>
                 <% else %>
-                  <p class="card-text">場所情報がありません</p>
-                <% end %>
-
-                <!-- コメント内容を表示 -->
-                <ul>
-                  <% post.replies.each do |reply| %>
-                    <li><%= reply.comment %></li>
-                  <% end %>
-                </ul>
-
-                <% if post.user == current_user %>
-                  <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-danger" %>
+                  <%= image_tag 'no_image.jpg', alt: "投稿画像", class: "img-fluid w-100 h-100" %>
                 <% end %>
               </div>
+            <% end %>
+            <div class="ml-3 mt-3">
+              <!-- いいねの数を表示 -->
+              <p>いいねの数: <span id="likes_count<%= post.id %>"><%= @like_counts[post.id] %></span></p>
+
+              <!-- コメント数を表示 -->
+              <p>コメントの数: <span id="comments_count<%= post.id %>"><%= @comment_counts[post.id] %></span></p>
+            </div>
+            <div class="text-center">
+              <!-- 折りたたみ/展開用のボタン -->
+              <button class="btn btn-primary view-more mb-4" data-target="#post<%= post.id %>">詳細を表示</button>
+            </div>
+
+            <!-- 場所情報の表示 -->
+            <div class="card-body post-detail" id="post<%= post.id %>" style="display: none;">
+              <h5 class="card-title"><%= post.caption %></h5>
+              <% if post.location %>
+                <p class="card-text">場所: <%= post.location.place_name %></p>
+                <p class="card-text">説明: <%= post.location.description %></p>
+              <% else %>
+                <p class="card-text">場所情報がありません</p>
+              <% end %>
+
+              <!-- コメント内容を表示 -->
+              <ul>
+                <% post.replies.each do |reply| %>
+                  <li><%= reply.comment %></li>
+                <% end %>
+              </ul>
+
+              <% if post.user == current_user %>
+                <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-danger" %>
+              <% end %>
             </div>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
+  <% else %>
+    <p class="text-center">まだ投稿がありません。</p>
+  <% end %>
+</div>
 
-    <!-- JavaScriptを使用して詳細部分を切り替え -->
-    <script>
-      $(document).ready(function () {
-        $('.view-more').click(function () {
-          var target = $($(this).data('target'));
-          target.slideToggle();
-        });
-      });
-    </script>
+<!-- JavaScriptを使用して詳細部分を切り替え -->
+<script>
+  $(document).ready(function () {
+    $('.view-more').click(function () {
+      var target = $($(this).data('target'));
+      target.slideToggle();
+    });
+  });
+</script>

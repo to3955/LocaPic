@@ -1,33 +1,37 @@
 <h2>Followers</h2>
-<table class='table'>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th>フォロー</th>
-      <th>フォロワー</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
+<% if @users.present? %>
+  <table class='table'>
+    <thead>
       <tr>
-        <td>
-          <%= link_to user_path(user) do %>
-            <%= image_tag user.get_profile_image(50, 50) %>
-          <% end %>
-        </td>
-        <td><%= user.last_name %><%= user.first_name %></td>
-        <td>
-          <%= link_to follows_user_path(user) do %>
-            <p>フォロー<%= user.followings.count %></p>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to followers_user_path(user) do %>
-            <p>フォロワー<%= user.followers.count %></p>
-          <% end %>
-        </td>
+        <th>Image</th>
+        <th>Name</th>
+        <th>フォロー</th>
+        <th>フォロワー</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= link_to user_path(user) do %>
+              <%= image_tag user.get_profile_image(50, 50) %>
+            <% end %>
+          </td>
+          <td><%= user.last_name %><%= user.first_name %></td>
+          <td>
+            <%= link_to follows_user_path(user) do %>
+              <p>フォロー<%= user.followings.count %></p>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to followers_user_path(user) do %>
+              <p>フォロワー<%= user.followers.count %></p>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>フォロワーがいません。</p>
+<% end %>

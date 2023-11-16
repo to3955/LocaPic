@@ -1,4 +1,5 @@
 <h2>Follows</h2>
+<% if @users.present? %>
   <table class='table'>
     <thead>
       <tr>
@@ -22,7 +23,7 @@
               <h6>フォロー<%= user.followers.count %></h6>
             <% end %>
           </td>
-          <td>  
+          <td>
             <%= link_to followers_user_path(user) do %>
               <h6>フォロワー<%= user.followeds.count %></h6>
             <% end %>
@@ -30,4 +31,7 @@
         </tr>
       <% end %>
     </tbody>
-  </table> 
+  </table>
+<% else %>
+  <p>フォローまたはフォロワーがいません。</p>
+<% end %>
