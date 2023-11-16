@@ -56,12 +56,17 @@ devise_scope :user do
 end
 
 
-   namespace :admin do
+  namespace :admin do
+  root to: "homes#top"
 
-    root to: "homes#top"
-    resources :users, only: [:index, :show, :edit, :update]
-    resources :posts, only: [:index, :show, :destroy]
-    resources :replies, only: [:destroy]
+  resources :users, only: [:index, :show, :edit, :update] do
+    member do
+      get 'user_posts', to: 'posts#user_posts', as: :user_posts
+    end
   end
+
+  resources :posts, only: [:index, :show, :destroy]
+  resources :replies, only: [:destroy]
+end
 
  end

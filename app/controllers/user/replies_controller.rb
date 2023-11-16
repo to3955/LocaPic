@@ -15,14 +15,14 @@ class User::RepliesController < ApplicationController
   def destroy
    post = Post.find(params[:post_id])
    reply = post.replies.find(params[:id])
-   
+
     if current_user == reply.user
       reply.destroy
-    end  
+    end
       @comments_count = post.replies.count
       @replies = post.replies
       @post = post  # @post変数を設定
-    
+
   end
 
   private

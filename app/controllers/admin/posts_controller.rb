@@ -1,7 +1,14 @@
 class Admin::PostsController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @posts = Post.all
+  end
+
+  def user_posts
+      @user = User.find(params[:id])
+      @posts = @user.posts
+      render 'index' # index のビューを再利用する
   end
 
   def show
