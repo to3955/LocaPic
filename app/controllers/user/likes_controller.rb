@@ -2,7 +2,11 @@ class User::LikesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @user = current_user
+    if params[:id].present?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
     @liked_posts = @user.liked_posts
   end
 
@@ -23,7 +27,5 @@ class User::LikesController < ApplicationController
 
     @like_counts = @post.likes.count
   end
-
-
 
 end

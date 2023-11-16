@@ -15,6 +15,7 @@
               <%= image_tag post.image, class: "img-fluid", style: "max-width: 100%;" %>
               <h2><%= post.caption %></h2>
               <% if post.location %>
+                <p>投稿者: <%= post.user.last_name %> <%= post.user.first_name %></p>
                 <p>場所: <%= post.location.place_name %></p>
                 <p>説明: <%= post.location.description %></p>
               <% else %>

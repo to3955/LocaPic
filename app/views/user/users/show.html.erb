@@ -5,7 +5,7 @@
   <div class="row">
     <div class="col-12 mx-auto"> <!-- col-10からcol-12に変更 -->
       <div class="row mb-2">
-        <h3 class="col-8">登録情報</h3>
+        <h3 class="col-8">Registration informations</h3>
         <div class="col-4 text-right">
           <%= link_to "edit", edit_information_path, class: "btn btn-success" %>
         </div>
@@ -50,8 +50,8 @@
     </div>
   </div>
   <div class="text-center mt-3">
-    <%= link_to "List of my posts", post_path(current_user), class: "btn btn-primary mr-3" %>
-    <%= link_to "Posts you liked", user_likes_path, class: "btn btn-primary mr-3" %>
+    <%= link_to "List of my posts", post_path(@user), class: "btn btn-primary mr-3" %>
+    <%= link_to "Posts you liked", user_likes_path(@user), class: "btn btn-primary mr-3" %>
     <%= link_to "Follow list", follows_user_path(@user), class: "btn btn-info mr-3" %>
     <%= link_to "Follower list", followers_user_path(@user), class: "btn btn-info" %>
   </div>

@@ -93,17 +93,24 @@ class User::PostsController < ApplicationController
 
 
   def show
-    @posts = current_user.posts
+    if params[:id].present?
+      @user = User.find(params[:id])
+    else
+      @user = current_user
+    end
+
+    @posts = @user.posts
     @like_counts = {}
     @comment_counts = {}
     @replies = {}
 
     @posts.each do |post|
-    @like_counts[post.id] = post.likes.count
-    @comment_counts[post.id] = post.replies.count
-    @replies[post.id] = post.replies
+      @like_counts[post.id] = post.likes.count
+      @comment_counts[post.id] = post.replies.count
+      @replies[post.id] = post.replies
     end
   end
+
 
   def show_detail
     @post = Post.find(params[:id])
