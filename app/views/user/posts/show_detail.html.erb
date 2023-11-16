@@ -7,23 +7,9 @@
           <%end%>
         <h2><%= @post.caption %></h2>
         <% if @post.location %>
+          <p>投稿者: <%= @post.user.last_name %> <%= @post.user.first_name %></p>
           <p>場所: <%= @post.location.place_name %></p>
           <p>説明: <%= @post.location.description %></p>
-          <div id="map" style="height: 300px;"></div>
-          <script>
-            // JavaScriptを使用して地図を表示
-            function initMap() {
-              var map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: <%= @post.location.latitude %>, lng: <%= @post.location.longitude %> },
-                zoom: 12
-              });
-
-              var marker = new google.maps.Marker({
-                position: { lat: <%= @post.location.latitude %>, lng: <%= @post.location.longitude %> },
-                map: map
-              });
-            }
-          </script>
         <% else %>
           <p>場所情報がありません</p>
         <% end %>
@@ -39,6 +25,25 @@
       </div>
     </div>
     <div class="col-md-4">
+      <div id="map" style="height: 300px; width: 100%;"></div>
+      <script>
+        // JavaScriptを使用して地図を表示
+        <% if @post.location %>
+          function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+              center: { lat: <%= @post.location.latitude %>, lng: <%= @post.location.longitude %> },
+              zoom: 12
+            });
+
+            var marker = new google.maps.Marker({
+              position: { lat: <%= @post.location.latitude %>, lng: <%= @post.location.longitude %> },
+              map: map
+            });
+          }
+        <% else %>
+          // @post.locationが存在しない場合の処理（例: デフォルトの地図表示など）
+        <% end %>
+      </script>
       <p>コメント内容:</p>
       <div id="comments">
        <%= render partial: "user/replies/reply", collection: @replies, as: :reply %>

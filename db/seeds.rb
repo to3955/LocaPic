@@ -74,8 +74,8 @@ end
 end
 
 Location.find_or_create_by!(place_name: "富士") do |location|
-  location.latitude = "28.65102"
-  location.longitude = "138.81324"
+  location.latitude = "35.46318660000001"
+  location.longitude = "138.5837799"
   location.description = "富士本西湖リゾート"
   #location.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
 end

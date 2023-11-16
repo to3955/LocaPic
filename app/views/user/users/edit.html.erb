@@ -19,62 +19,60 @@
     </div>
 
     <tr>
-    <td>氏名</td>
-    <td>
-      <div class="row">
-        <div class="col">
-          <%= f.text_field :last_name, class: 'form-control last_name' %>
+      <td>氏名</td>
+      <td>
+        <div class="row">
+          <div class="col">
+            <%= f.text_field :last_name, class: 'form-control last_name' %>
+          </div>
+          <div class="col">
+            <%= f.text_field :first_name, class: 'form-control first_name' %>
+          </div>
         </div>
-        <div class="col">
-          <%= f.text_field :first_name, class: 'form-control first_name' %>
+      </td>
+    </tr>
+    <tr>
+      <td>フリガナ</td>
+      <td>
+        <div class="row">
+          <div class="col">
+            <%= f.text_field :last_name_kana, class: 'form-control last_name_kana' %>
+          </div>
+          <div class="col">
+            <%= f.text_field :first_name_kana, class: 'form-control first_name_kana' %>
+          </div>
         </div>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>フリガナ</td>
-    <td>
-      <div class="row">
-        <div class="col">
-          <%= f.text_field :last_name_kana, class: 'form-control last_name_kana' %>
-        </div>
-        <div class="col">
-          <%= f.text_field :first_name_kana, class: 'form-control first_name_kana' %>
-        </div>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td>メールアドレス</td>
-    <td><%= f.text_field :email, class: 'form-control email' %></td>
-  </tr>
-
-  </table>
+      </td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td><%= f.text_field :email, class: 'form-control email' %></td>
+    </tr>
 
     <div class="form-group">
       <%= f.submit 'Save edits', class: 'btn btn-success' %>
       <%= link_to '退会', users_confirm_path, class: 'btn btn-danger ml-5' %>
     </div>
+
+    <script>
+      // プロフィール画像の選択が変更されたときにプレビューを表示
+      const profileImageInput = document.getElementById('profile-image-input');
+      const profileImagePreview = document.getElementById('profile-image-preview');
+      const imageUploadContainer = document.getElementById('image-upload-container');
+
+      profileImagePreview.addEventListener('click', () => {
+        profileImageInput.click();
+      });
+
+      profileImageInput.addEventListener('change', (e) => {
+        const selectedImage = e.target.files[0];
+        if (selectedImage) {
+          const objectURL = URL.createObjectURL(selectedImage);
+          profileImagePreview.src = objectURL;
+        } else {
+          profileImagePreview.src = '';
+        }
+      });
+    </script>
   <% end %>
 </div>
-
-<script>
-  // プロフィール画像の選択が変更されたときにプレビューを表示
-  const profileImageInput = document.getElementById('profile-image-input');
-  const profileImagePreview = document.getElementById('profile-image-preview');
-  const imageUploadContainer = document.getElementById('image-upload-container');
-
-  profileImagePreview.addEventListener('click', () => {
-    profileImageInput.click();
-  });
-
-  profileImageInput.addEventListener('change', (e) => {
-    const selectedImage = e.target.files[0];
-    if (selectedImage) {
-      const objectURL = URL.createObjectURL(selectedImage);
-      profileImagePreview.src = objectURL;
-    } else {
-      profileImagePreview.src = '';
-    }
-  });
-</script>

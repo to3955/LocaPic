@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :likes, source: :post
   has_many :search_histories
 
+  validate :validate_profile_image
+
   GUEST_USER_EMAIL = "guest@example.com"
 
 def get_profile_image(width, height)
@@ -49,16 +51,16 @@ end
     followings.include?(user)
   end
 
+  def full_name
+    "#{last_name} #{first_name}"
+  end
+
   def self.search_by_name(keyword)
     if keyword.present?
-      where("last_name LIKE :keyword OR first_name LIKE :keyword", keyword: "%#{keyword}%")
+      where("last_name LIKE :keyword OR first_name LIKE :keyword OR (last_name || ' ' || first_name) LIKE :keyword", keyword: "%#{keyword}%")
     else
       all
     end
-  end
-
-  def full_name
-    "#{last_name} #{first_name}"
   end
 
   def guest?
@@ -82,6 +84,17 @@ end
     # ここにメッセージ送信の処理を追加
     # 例: メッセージをデータベースに保存する
     Message.create(subject: subject, content: content, sender: sender, recipient: self)
+  end
+
+  private
+
+  def validate_profile_image
+    if profile_image.attached?
+      allowed_types = %w[image/jpeg image/png]
+      unless allowed_types.include?(profile_image.content_type)
+        errors.add(:profile_image, 'must be a valid image file (JPEG or PNG)')
+      end
+    end
   end
 
 

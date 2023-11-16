@@ -9,6 +9,7 @@ class Post < ApplicationRecord
 
   validates :image, presence: true
   validates :caption, presence: true
+  validate :valid_image?
 
 
   # モデル内で定義されるメソッド
@@ -44,6 +45,14 @@ class Post < ApplicationRecord
       @post = Post.where("place_name LIKE ?", "%#{word}%")
     else
       @post = Post.all
+    end
+  end
+
+  private
+
+  def valid_image?
+    if image.attached? && !image.content_type.in?(%w[image/jpeg image/png])
+      errors.add(:image, 'must be a valid image file (JPEG or PNG)')
     end
   end
 
