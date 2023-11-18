@@ -61,7 +61,18 @@
               <%= form.submit "投稿", class: "btn btn-primary" %>
             </div>
 
-            <%= form.error_messages %>
+            <% if @post.errors.any? %>
+              <div id="error_explanation">
+                <div class="alert alert-danger">
+                  The form contains <%= pluralize(@post.errors.count, "error") %>.
+                </div>
+                <ul>
+                  <% @post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>
