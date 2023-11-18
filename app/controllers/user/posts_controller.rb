@@ -43,6 +43,7 @@ class User::PostsController < ApplicationController
           redirect_to show_detail_post_path(@post), notice: '投稿が作成されました'
         else
           # ポストの保存に失敗した場合の処理
+          flash.now[:alert] = '投稿の作成に失敗しました。入力内容を確認してください。'
           render :new
         end
       else
