@@ -7,8 +7,36 @@
 
              <div class="form-group">
               <%= form.label :image, '写真のアップロード' %>
-              <%= form.file_field :image, class: "form-control" %>
+              <%= form.file_field :image, class: "form-control", id: "image-input" %>
             </div>
+
+            <!-- 画像プレビュー領域 -->
+            <!-- 画像プレビュー領域 -->
+            <div id="image-preview" style="display: none;">
+              <img src="#" alt="Image Preview" id="preview-image" class="img-thumbnail" style="max-width: 100%; max-height: 200px;">
+            </div>
+            <!-- JavaScript -->
+            <script>
+              document.addEventListener("DOMContentLoaded", function() {
+                // 画像が選択されたときの処理
+                document.getElementById("image-input").addEventListener("change", function() {
+                  var input = this;
+                  var preview = document.getElementById("preview-image");
+                  var previewContainer = document.getElementById("image-preview");
+
+                  if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                      preview.src = e.target.result;
+                      previewContainer.style.display = "block";
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                  }
+                });
+              });
+            </script>
 
             <div class="form-group">
               <%= form.label :caption, 'キャプション' %>
