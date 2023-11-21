@@ -103,7 +103,7 @@ end
   def account_active?
     # このメソッドはインスタンス変数の状態がわからないので,常に読みに行きます.必要に応じて判断ロジックを変更してください
     begin
-      return User.find_by(id: self.id) ? true : false
+      return User.find_by(id: self.id, is_deleted: false) ? true : false
     rescue => e
       return false
     end
