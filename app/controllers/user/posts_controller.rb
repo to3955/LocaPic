@@ -1,6 +1,7 @@
 class User::PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :is_matching_login_user, only: [:update]
+  before_action :require_owner, only: [:destroy]
   before_action :check_guest, only: [:new, :create, :destroy]
 
   def new
@@ -163,5 +164,13 @@ class User::PostsController < ApplicationController
       redirect_to root_path, alert: "ゲストユーザーはこのアクションを実行できません。"
     end
  end
+
+  def require_owner
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+      flash[:alert] = '他のユーザーの投稿を削除する権限がありません。'
+      redirect_to user_post_path(@post.user, @post)
+    end
+  end
 
 end
