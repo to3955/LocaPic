@@ -28,7 +28,7 @@ class User::LikesController < ApplicationController
 
     # いいねが存在する場合のみ削除
     like = @user.likes.find_by(post_id: @post.id)
-    like.destroy
+    like&.destroy
 
     @like_counts = @post.likes.count
   end
