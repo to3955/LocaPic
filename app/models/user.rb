@@ -92,7 +92,22 @@ end
     Message.create(subject: subject, content: content, sender: sender, recipient: self)
   end
 
+  def active_for_authentication?
+        # Uncomment the below debug statement to view the properties of the returned self model values.
+        # logger.debug self.to_yaml
+        super && account_active?
+  end
+
   private
+
+  def account_active?
+    # このメソッドはインスタンス変数の状態がわからないので,常に読みに行きます.必要に応じて判断ロジックを変更してください
+    begin
+      return User.find_by(id: self.id) ? true : false
+    rescue => e
+      return false
+    end
+  end
 
   def validate_profile_image
     if profile_image.attached?

@@ -9,7 +9,7 @@ class User::SearchesController < ApplicationController
     if @word.present?
       @users = User.search_by_name(@word)
       @locations = Location.search_by_place_name_or_address(@word)
-      current_user.search_histories.create(term: @word)
+      #current_user.search_histories.create(term: @word)
     else
       # キーワードが空の場合に何らかの処理を行うか、メッセージを表示することもできます
       flash[:notice] = "キーワードを入力してください。"
