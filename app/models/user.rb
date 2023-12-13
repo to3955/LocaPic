@@ -11,14 +11,9 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :likes, source: :post
   has_many :search_histories
 
-  validates :last_name, presence: true
-  validates :first_name, presence: true
-  validates :last_name_kana, presence: true
-  validates :first_name_kana, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: true
-  validates :password_confirmation, presence: true
 
+
+  validate :validate_profile_image
 
   GUEST_USER_EMAIL = "guest@example.com"
 
@@ -29,8 +24,6 @@ def get_profile_image(width, height)
   end
   profile_image.variant(resize_to_limit: [width, height]).processed
 end
-
- validate :validate_profile_image
 
 
   # フォローしている関連付け
