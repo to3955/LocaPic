@@ -11,8 +11,10 @@ class User < ApplicationRecord
   has_many :liked_posts, through: :likes, source: :post
   has_many :search_histories
 
-
-
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name_kana, presence: true
+  validates :first_name_kana, presence: true
   validate :validate_profile_image
 
   GUEST_USER_EMAIL = "guest@example.com"
