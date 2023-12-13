@@ -1,6 +1,7 @@
 <h2>Sign up</h2>
  <div class="container"> <!-- コンテナを削除 -->
   <%= form_with model: @user, url: user_registration_path do |f| %>
+  <%= render 'layouts/error_messages', resource: @user %>
      <div class="form-group mb-0">
     <label for="last_name">名前</label>
     <div class="row">
